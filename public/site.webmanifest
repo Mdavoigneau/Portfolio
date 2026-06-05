@@ -1,0 +1,12 @@
+{
+  "name": "Matteo Davoigneau",
+  "short_name": "Davoigneau",
+  "description": "Frontend engineer for financial data.",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#28463a",
+  "background_color": "#fdfdfc",
+  "display": "standalone"
+}
