@@ -1,4 +1,4 @@
-import { ArrowRight, Github, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container, Eyebrow, Section } from "@/components/ui/section";
 import { SITE } from "@/lib/site";
@@ -54,7 +54,7 @@ export function Contact() {
             of the job.
           </p>
           <div className="flex flex-col items-start justify-between gap-4 border-t border-line/60 pt-6 sm:flex-row sm:items-center">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-ink-2">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-ink-2">
               <span>© {SITE.name} · {SITE.site}</span>
               <a
                 href={SITE.github}
@@ -64,11 +64,16 @@ export function Contact() {
               >
                 <Github className="size-3.5" /> Source on GitHub
               </a>
+              <a
+                href={SITE.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 transition-colors hover:text-brand-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
+              >
+                <Linkedin className="size-3.5" /> Want something more professional?
+              </a>
             </div>
-            <p className="font-mono text-[11px] leading-relaxed text-ink-3">
-              Built with React 18 · TypeScript (strict) · Vite · Tailwind v4 · Radix. The chart is
-              raw SVG. No template.
-            </p>
+            <p className="font-mono text-[11px] leading-relaxed text-ink-3">Built with React 18</p>
           </div>
         </Container>
       </footer>

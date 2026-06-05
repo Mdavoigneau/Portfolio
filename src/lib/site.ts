@@ -8,6 +8,7 @@ export const SITE = {
   site: "davoigneau.com",
   resume: "/resume.html",
   github: "https://github.com/Mdavoigneau/Portfolio",
+  linkedin: "https://www.linkedin.com/in/mdavoigneau",
 } as const;
 
 export interface NavLink {
