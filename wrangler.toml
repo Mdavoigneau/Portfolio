@@ -1,4 +1,4 @@
-name = "davoigneau"
+name = "portfolio"
 compatibility_date = "2026-01-01"
 
 # Build the static site first, then deploy ./dist as a Workers static-assets
