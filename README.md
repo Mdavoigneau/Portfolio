@@ -36,24 +36,23 @@ npm run build      # tsc -b && vite build → dist/
 npm run preview    # serve the production build
 ```
 
-## Deploy to Cloudflare Pages
+## Deploy to Cloudflare (Workers Static Assets)
 
-**Option A, Git integration (recommended).** Connect the repo in the Cloudflare
-dashboard → Workers & Pages → Create → Pages, with:
+Connected to GitHub via Cloudflare's Workers Builds. On each push, Cloudflare runs
+`npx wrangler deploy`; per `wrangler.toml` that builds the site (`npm run build`) and
+serves `./dist` as a static-assets Worker. Settings:
 
-- Build command: `npm run build`
-- Build output directory: `dist`
+- Deploy command: `npx wrangler deploy`
+- Build command: can be left blank (the `[build]` step in `wrangler.toml` runs the build).
 
-Then add `davoigneau.com` as a custom domain.
-
-**Option B, direct upload via Wrangler.**
+Locally:
 
 ```bash
-npm run deploy     # builds, then: npx wrangler pages deploy dist
+npm run deploy     # = npx wrangler deploy (builds, then deploys ./dist)
 ```
 
-`public/_headers` applies sensible security and caching headers. `wrangler.toml`
-sets the Pages output directory.
+`public/_headers` applies security and caching headers; `not_found_handling` falls back
+to the single page. Add `davoigneau.com` as a custom domain in the dashboard.
 
 ## A note on the work referenced
 

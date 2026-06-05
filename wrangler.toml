@@ -1,3 +1,12 @@
 name = "davoigneau"
 compatibility_date = "2026-01-01"
-pages_build_output_dir = "dist"
+
+# Build the static site first, then deploy ./dist as a Workers static-assets
+# project. `wrangler deploy` runs this build command itself, so the CI deploy
+# command (`npx wrangler deploy`) is self-sufficient.
+[build]
+command = "npm run build"
+
+[assets]
+directory = "./dist"
+not_found_handling = "single-page-application"
