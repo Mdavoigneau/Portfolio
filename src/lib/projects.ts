@@ -335,7 +335,7 @@ export const PROJECTS: Project[] = [
       "OCR serial/IMEI extraction with multi-format barcode fallback; eligibility and payout rules computed to the cent; idempotent submission so a re-run never double-files.",
     stack: ["Python", "Next.js", "PostgreSQL", "OCR", "Redis"],
     metrics: [
-      { label: "~€200k/yr", provenance: "team" },
+      { label: "~A$330k/yr", provenance: "team" },
       { label: "~80% less processing time", provenance: "team" },
     ],
     tags: ["Process automation", "OCR"],
@@ -351,7 +351,7 @@ export const PROJECTS: Project[] = [
     detail:
       "Customers get a personalised quote and book without phone tag; the back-office manages brands, models, repairs and prices. Replaced phone-and-email coordination with a self-serve flow.",
     note:
-      "Server-side price recalculation with ±0.01€ tolerance inside a transaction; immutable devis snapshots (a JSON blob frozen at creation) for an audit trail; an hourly Google-Sheets catalogue sync with longest-prefix series inference; a hand-rolled SVG reservation timeline, no charting library.",
+      "Server-side price recalculation with a to-the-cent (±0.01) tolerance inside a transaction; immutable devis snapshots (a JSON blob frozen at creation) for an audit trail; an hourly Google-Sheets catalogue sync with longest-prefix series inference; a hand-rolled SVG reservation timeline, no charting library.",
     stack: ["Next.js", "React", "TypeScript", "PostgreSQL", "Recharts"],
     metrics: [{ label: "~20 hrs/wk admin saved", provenance: "self" }],
     tags: ["Self-serve workflow", "Transactional integrity"],
@@ -431,5 +431,48 @@ export const PROJECTS: Project[] = [
   },
 ];
 
+/** Approximate build / ship month per project (YYYY-MM), for date ordering. */
+const DATES: Record<string, string> = {
+  "orange-analytics": "2024-08",
+  "refurb-price": "2024-11",
+  "irep-quote": "2025-04",
+  "irep-claim": "2025-07",
+  "finance-alerts": "2026-02",
+  "team-planner": "2026-03",
+  "proposal-engine": "2026-04",
+  "fact-find": "2026-04",
+  "share-registry": "2026-04",
+  "strategy-papers": "2026-04",
+  "transcription": "2026-04",
+  "smsf-agent": "2026-04",
+  "asx-scanner": "2026-05",
+  "sma-dashboard": "2026-05",
+  "unit-trust": "2026-05",
+  "trend-following": "2026-05",
+  "smsf-intake": "2026-05",
+  "compliance-reviewer": "2026-06",
+  "ai-mds": "2026-06",
+  "csat": "2026-06",
+  "landing-platform": "2026-06",
+  "mp-email": "2026-06",
+};
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+export function formatProjectDate(ym: string): string {
+  const [y, m] = ym.split("-");
+  const month = MONTHS[Number(m ?? "1") - 1] ?? "";
+  return `${month} '${(y ?? "").slice(2)}`;
+}
+
+export interface DatedProject extends Project {
+  date: string;
+}
+
 export const FEATURED = PROJECTS.filter((p) => p.featured);
-export const LEDGER = PROJECTS;
+
+/** The full ledger, newest first. */
+export const LEDGER: DatedProject[] = PROJECTS.map((p) => ({
+  ...p,
+  date: DATES[p.id] ?? "2026-01",
+})).sort((a, b) => b.date.localeCompare(a.date));

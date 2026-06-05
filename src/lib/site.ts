@@ -33,6 +33,6 @@ export interface Metric {
 export const METRICS: Metric[] = [
   { value: "22", label: "systems shipped solo" },
   { value: "~400", label: "hours/month recovered for their teams" },
-  { value: "~€200k", label: "saved per year by one automation" },
+  { value: "~A$330k", label: "saved per year by one automation" },
   { value: "~$7", label: "monthly cost to run a typical one" },
 ];

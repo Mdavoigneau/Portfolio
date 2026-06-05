@@ -2,19 +2,22 @@ import { ChevronRight } from "lucide-react";
 import { Container, Section, SectionHead } from "@/components/ui/section";
 import { ProvenanceDot, ProvenanceLegend, StatusBadge } from "@/components/ui/provenance";
 import { ProjectDialog } from "@/components/site/ProjectDialog";
-import { LEDGER, type Project } from "@/lib/projects";
+import { LEDGER, formatProjectDate, type DatedProject } from "@/lib/projects";
 
-function LedgerRow({ project }: { project: Project }) {
+function LedgerRow({ project }: { project: DatedProject }) {
   const primary = project.metrics[0];
   return (
     <ProjectDialog project={project}>
       <button
         type="button"
-        className="group flex w-full items-center gap-3 rounded-lg border border-line bg-surface/70 px-4 py-3 text-left transition-colors hover:border-brand-line hover:bg-mint/[0.12] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
+        className="group flex w-full items-center gap-3 rounded-lg border border-line bg-surface/70 px-3.5 py-3 text-left transition-colors hover:border-brand-line hover:bg-mint/[0.12] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
       >
+        <span className="w-12 shrink-0 font-mono text-[10px] uppercase tracking-wider text-ink-3">
+          {formatProjectDate(project.date)}
+        </span>
         <div className="min-w-0 flex-1">
           <div className="truncate text-sm font-medium text-ink">{project.title}</div>
-          <div className="mt-0.5 truncate font-mono text-[10px] uppercase tracking-wider text-ink-3">
+          <div className="truncate font-mono text-[10px] uppercase tracking-wider text-ink-3">
             {project.context}
           </div>
         </div>
@@ -34,8 +37,6 @@ function LedgerRow({ project }: { project: Project }) {
 }
 
 export function ProjectLedger() {
-  const bank = LEDGER.filter((p) => p.context.startsWith("A financial institution"));
-  const beyond = LEDGER.filter((p) => !p.context.startsWith("A financial institution"));
   const inProd = LEDGER.filter((p) => p.status === "prod").length;
 
   return (
@@ -48,30 +49,17 @@ export function ProjectLedger() {
               Every system, <span className="font-serif italic text-brand-700">accounted for</span>.
             </>
           }
-          lead={`All ${LEDGER.length} shipped solo, ${inProd} of them in production. Each figure is marked with where it came from. Open any row for the detail.`}
+          lead={`All ${LEDGER.length} shipped solo, ${inProd} of them in production, newest first. Each figure is marked with where it came from. Open any row for the detail.`}
         />
 
         <div className="mt-6">
           <ProvenanceLegend />
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
-          <div className="min-w-0">
-            <h3 className="eyebrow mb-3 text-ink-2">At a financial institution · Sydney</h3>
-            <div className="space-y-2">
-              {bank.map((p) => (
-                <LedgerRow key={p.id} project={p} />
-              ))}
-            </div>
-          </div>
-          <div className="min-w-0">
-            <h3 className="eyebrow mb-3 text-ink-2">Own business, an MP's office, iRep, Orange &amp; research</h3>
-            <div className="space-y-2">
-              {beyond.map((p) => (
-                <LedgerRow key={p.id} project={p} />
-              ))}
-            </div>
-          </div>
+        <div className="mt-8 grid grid-cols-1 gap-2 md:grid-cols-2">
+          {LEDGER.map((p) => (
+            <LedgerRow key={p.id} project={p} />
+          ))}
         </div>
       </Container>
     </Section>
