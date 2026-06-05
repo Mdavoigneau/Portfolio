@@ -2,7 +2,7 @@ import { ChevronRight } from "lucide-react";
 import { Container, Section, SectionHead } from "@/components/ui/section";
 import { ProvenanceDot, ProvenanceLegend, StatusBadge } from "@/components/ui/provenance";
 import { ProjectDialog } from "@/components/site/ProjectDialog";
-import { LEDGER, formatProjectDate, type DatedProject } from "@/lib/projects";
+import { LEDGER, type DatedProject } from "@/lib/projects";
 
 function LedgerRow({ project }: { project: DatedProject }) {
   const primary = project.metrics[0];
@@ -12,9 +12,6 @@ function LedgerRow({ project }: { project: DatedProject }) {
         type="button"
         className="group flex w-full items-center gap-3 rounded-lg border border-line bg-surface/70 px-3.5 py-3 text-left transition-colors hover:border-brand-line hover:bg-mint/[0.12] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
       >
-        <span className="w-12 shrink-0 font-mono text-[10px] uppercase tracking-wider text-ink-3">
-          {formatProjectDate(project.date)}
-        </span>
         <div className="min-w-0 flex-1">
           <div className="truncate text-sm font-medium text-ink">{project.title}</div>
           <div className="truncate font-mono text-[10px] uppercase tracking-wider text-ink-3">
@@ -49,7 +46,7 @@ export function ProjectLedger() {
               Every system, <span className="font-serif italic text-brand-700">accounted for</span>.
             </>
           }
-          lead={`All ${LEDGER.length} shipped solo, ${inProd} of them in production, newest first. Each figure is marked with where it came from. Open any row for the detail.`}
+          lead={`All ${LEDGER.length} shipped solo, ${inProd} of them in production. Each figure is marked with where it came from. Open any row for the detail.`}
         />
 
         <div className="mt-6">
