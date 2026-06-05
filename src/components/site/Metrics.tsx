@@ -22,8 +22,8 @@ export function Metrics() {
       </Container>
       <Container>
         <p className="border-t border-line/60 py-3 text-center text-xs text-ink-3">
-          Production systems shipped solo across private wealth, funds administration, SMSF,
-          compliance, telecoms and ventures of my own · front-end through to infrastructure
+          Most time-saved figures are reported by the teams using the tools; the rest are my own
+          estimates. Each project's source is marked in the ledger below.
         </p>
       </Container>
     </div>

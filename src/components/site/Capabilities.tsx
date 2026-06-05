@@ -21,7 +21,7 @@ const CAPABILITIES: Capability[] = [
   {
     icon: Component,
     title: "Design systems for data-dense domains",
-    body: "Foundations → Components → Patterns → Templates, owned end-to-end and held to the line on consistency, visual polish and WCAG 2.2 AA. A reusable component system shared across two dozen products.",
+    body: "Foundations → Components → Patterns → Templates, owned end-to-end and held to the line on consistency, visual polish and WCAG 2.2 AA. A reusable component system shared across the whole estate.",
     evidence: "Tokens, CVA + clsx + tailwind-merge, Radix primitives: exactly this page.",
   },
   {
@@ -51,7 +51,7 @@ const CAPABILITIES: Capability[] = [
   {
     icon: Compass,
     title: "First principles & real autonomy",
-    body: "Twenty-four production systems shipped solo on ~$190/month of infrastructure. Maths derived by hand where it matters, and a bias toward telling you exactly what I have and haven't done over a confident bluff.",
+    body: "Twenty-two production systems shipped solo, most on a $5–7/month box. Maths derived by hand where it matters, and a bias toward telling you exactly what I have and haven't done over a confident bluff.",
     evidence: "Independent delivery, end-to-end, with audit logging and human-review gates.",
   },
 ];

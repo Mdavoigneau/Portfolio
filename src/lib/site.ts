@@ -19,7 +19,7 @@ export interface NavLink {
 export const NAV: NavLink[] = [
   { href: "#proof", label: "Live proof" },
   { href: "#work", label: "Work" },
-  { href: "#capabilities", label: "Capabilities" },
+  { href: "#ledger", label: "Ledger" },
   { href: "#about", label: "About" },
   { href: "#contact", label: "Contact" },
 ];
@@ -31,8 +31,8 @@ export interface Metric {
 
 /** Headline numbers across the production work. */
 export const METRICS: Metric[] = [
-  { value: "24", label: "production systems, shipped solo" },
-  { value: "~$250k", label: "staff time recovered per year" },
-  { value: "~400", label: "hours saved per month" },
-  { value: "~$190", label: "monthly cloud infrastructure" },
+  { value: "22", label: "systems shipped solo" },
+  { value: "~400", label: "hours/month recovered for their teams" },
+  { value: "~€200k", label: "saved per year by one automation" },
+  { value: "~$7", label: "monthly cost to run a typical one" },
 ];

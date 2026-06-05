@@ -48,11 +48,11 @@ export function About() {
           <div className="mt-6 space-y-4 text-base leading-relaxed text-ink-2">
             <p>
               I'm a master's-qualified engineer who builds end-to-end: front-end through to
-              infrastructure, AI agents through to audit logging. Over a year at a licensed Sydney
-              brokerage I shipped two dozen production systems solo, across private wealth, funds
-              administration, SMSF, compliance and operations. Before that I ran a repair business
-              end-to-end, which is where I learned firsthand where real-world processes actually
-              break.
+              infrastructure, AI agents through to audit logging. I've shipped twenty-two
+              production systems solo; most recently at a Sydney financial institution, across
+              private wealth, funds administration, SMSF, compliance and operations. Before that I
+              ran a repair business end-to-end, which is where I learned firsthand where real-world
+              processes actually break.
             </p>
             <p>
               My interest in markets is neither recent nor decorative. It took hold during the 2021

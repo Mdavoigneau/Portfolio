@@ -48,7 +48,7 @@ export function Contact() {
         <Container className="flex flex-col gap-6 py-10">
           <p className="max-w-3xl text-xs leading-relaxed text-ink-3">
             <span className="font-medium text-ink-2">A note on the work shown:</span> several
-            systems above are live, regulated platforms built for a licensed brokerage. Client
+            systems above are live, regulated platforms built for a financial institution. Client
             identifiers, holdings, credentials and screenshots are deliberately omitted, and every
             figure on this page is illustrative or synthetic. Discretion with client data is part
             of the job.

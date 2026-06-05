@@ -4,6 +4,7 @@ import { Hero } from "@/components/site/Hero";
 import { Metrics } from "@/components/site/Metrics";
 import { LiveProof } from "@/components/site/LiveProof";
 import { SelectedWork } from "@/components/site/SelectedWork";
+import { ProjectLedger } from "@/components/site/ProjectLedger";
 import { Capabilities } from "@/components/site/Capabilities";
 import { About } from "@/components/site/About";
 import { Contact } from "@/components/site/Contact";
@@ -23,6 +24,7 @@ export function App() {
         <Metrics />
         <LiveProof />
         <SelectedWork />
+        <ProjectLedger />
         <Capabilities />
         <About />
         <Contact />

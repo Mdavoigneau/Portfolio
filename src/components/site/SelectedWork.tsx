@@ -1,43 +1,48 @@
+import { ArrowRight } from "lucide-react";
 import { Badge, TechChip } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
-import { Container, Eyebrow, Section, SectionHead } from "@/components/ui/section";
-import { ALSO_SHIPPED, FEATURED, type Project } from "@/lib/projects";
+import { Container, Section, SectionHead } from "@/components/ui/section";
+import { MetricPill, ProvenanceLegend, StatusBadge } from "@/components/ui/provenance";
+import { ProjectDialog } from "@/components/site/ProjectDialog";
+import { FEATURED, LEDGER, type Project } from "@/lib/projects";
 
 function WorkCard({ p }: { p: Project }) {
+  const primary = p.metrics[0];
   return (
-    <Card interactive className="flex h-full flex-col p-6">
-      <div className="flex items-start justify-between gap-3">
-        <Eyebrow>{p.context}</Eyebrow>
-        <Badge variant="mint" size="sm" className="tnum shrink-0 whitespace-nowrap">
-          {p.metric}
-        </Badge>
-      </div>
-
-      <h3 className="mt-3 text-xl tracking-tight text-ink">{p.title}</h3>
-      <p className="mt-2.5 text-sm leading-relaxed text-ink-2">{p.blurb}</p>
-
-      <div className="mt-4 rounded-lg border-l-2 border-brand-line bg-sunken/60 px-3.5 py-3">
-        <div className="mb-1 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-3">
-          How it's built
+    <ProjectDialog project={p}>
+      <button
+        type="button"
+        className="group flex h-full w-full flex-col rounded-xl border border-line bg-surface p-6 text-left shadow-card ring-1 ring-ink/[0.02] transition-[transform,box-shadow,border-color] duration-200 ease-[var(--ease-out-soft)] hover:-translate-y-0.5 hover:border-brand-line hover:shadow-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
+      >
+        <div className="flex items-start justify-between gap-3">
+          <span className="eyebrow">{p.context}</span>
+          <StatusBadge status={p.status} className="shrink-0" />
         </div>
-        <p className="text-[0.8125rem] leading-relaxed text-ink-2">{p.note}</p>
-      </div>
 
-      <div className="mt-auto pt-4">
-        <div className="mb-2 flex flex-wrap gap-1.5">
-          {p.tags.map((t) => (
+        <h3 className="mt-3 text-xl tracking-tight text-ink">{p.title}</h3>
+        <p className="mt-2.5 text-sm leading-relaxed text-ink-2">{p.summary}</p>
+
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          {primary ? <MetricPill metric={primary} /> : null}
+          {p.tags?.slice(0, 1).map((t) => (
             <Badge key={t} variant="outline" size="sm">
               {t}
             </Badge>
           ))}
         </div>
-        <div className="flex flex-wrap gap-1.5">
-          {p.stack.map((s) => (
-            <TechChip key={s}>{s}</TechChip>
-          ))}
+
+        <div className="mt-auto pt-5">
+          <div className="mb-3 flex flex-wrap gap-1.5">
+            {p.stack.slice(0, 4).map((s) => (
+              <TechChip key={s}>{s}</TechChip>
+            ))}
+          </div>
+          <span className="inline-flex items-center gap-1 text-xs font-medium text-brand-600">
+            View details
+            <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+          </span>
         </div>
-      </div>
-    </Card>
+      </button>
+    </ProjectDialog>
   );
 }
 
@@ -45,45 +50,33 @@ export function SelectedWork() {
   return (
     <Section id="work" wash>
       <Container>
-        <SectionHead
-          eyebrow="Selected work"
-          title={
-            <>
-              Systems people <span className="font-serif italic text-brand-700">rely</span> on.
-            </>
-          }
-          lead="Production work across private wealth, funds administration, SMSF and compliance, plus a business of my own and quant research on the side. All live in production; client identifiers, holdings and credentials are deliberately omitted."
-        />
-
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {FEATURED.map((p) => (
-            <WorkCard key={p.title} p={p} />
-          ))}
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <SectionHead
+            eyebrow="Selected work"
+            title={
+              <>
+                Systems people <span className="font-serif italic text-brand-700">rely</span> on.
+              </>
+            }
+            lead="Production work across private wealth, funds administration, SMSF and compliance, plus a business of my own, an MP's office, and quant research. Client identifiers, holdings and credentials are deliberately omitted; every figure is marked with its source."
+          />
+          <a
+            href="#ledger"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line-strong bg-surface px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-brand-line hover:bg-brand-tint/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
+          >
+            All {LEDGER.length} in the ledger
+            <ArrowRight className="size-4" />
+          </a>
         </div>
 
-        {/* Also shipped */}
-        <div className="mt-12">
-          <Eyebrow className="mb-5">Also in production</Eyebrow>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {ALSO_SHIPPED.map((m) => (
-              <div
-                key={m.title}
-                className="rounded-lg border border-line bg-surface/70 p-4"
-              >
-                <div className="flex items-baseline justify-between gap-2">
-                  <h4 className="text-sm font-medium text-ink">{m.title}</h4>
-                </div>
-                <div className="mt-0.5 font-mono text-[10px] uppercase tracking-wider text-ink-3">
-                  {m.context}
-                </div>
-                <p className="mt-2 text-[0.8125rem] leading-relaxed text-ink-2">{m.blurb}</p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-6 text-sm text-ink-3">
-            … and more: SMSF client-data intake portals, fund-admin sync integrations, a daily
-            imports orchestrator, an AI email router for an MP's office, on-device transcription.
-          </p>
+        <div className="mt-6">
+          <ProvenanceLegend />
+        </div>
+
+        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {FEATURED.map((p) => (
+            <WorkCard key={p.id} p={p} />
+          ))}
         </div>
       </Container>
     </Section>
