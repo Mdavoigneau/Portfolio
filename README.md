@@ -1,12 +1,25 @@
-# davoigneau.com
+# Matteo Davoigneau
 
-A one-page portfolio for **Matteo Davoigneau**, a frontend engineer for financial
-data. The page is deliberately built in the exact stack of the role it's aimed at,
-so the site is itself the work sample: a hand-rolled, interactive **raw-SVG chart**
-(no charting library) and a headless **TanStack** data grid, both styled from a
-single set of design tokens.
+Full-stack and frontend engineer in Sydney, focused on financial data. I build
+end-to-end, from the front-end through to the infrastructure it runs on: data-dense
+dashboards, charts and ledgers, the typed APIs behind them, and the parts around them
+that keep data trustworthy (auth, audit logging, encrypted backups, human-review gates).
 
-## Stack
+I work from first principles, care about craft and precision, and like owning a product
+surface from the design system down to the deploy. Off the clock I invest in equities and
+derivatives, and build the tools I wish existed.
+
+- **Site:** https://davoigneau.com
+- **Email:** matteo.davoigneau@gmail.com
+- **Location:** Sydney, Australia
+
+## This repository
+
+The source of my portfolio site. It is a single page, built in the stack it talks about,
+so the site is itself a work sample: a hand-rolled, interactive raw-SVG chart (no charting
+library) and a headless TanStack data grid, both styled from one set of design tokens.
+
+### Stack
 
 - **React 18** + **TypeScript** (strict, plus `noUncheckedIndexedAccess`,
   `exactOptionalPropertyTypes`)
@@ -20,51 +33,36 @@ single set of design tokens.
 
 No charting wrapper, no UI template.
 
-## Design
-
-Typography and palette echo the résumé (the "EngAIn" design language): **Figtree**
-for body/UI, **Fraunces** (often italic) for display headings, **Geist Mono** for
-labels, over warm-neutral greys with a teal-green accent and a mint wash.
-
-## Develop
+### Develop
 
 ```bash
 npm install
 npm run dev        # http://localhost:5173
 npm run typecheck  # tsc -b, strict
-npm run build      # tsc -b && vite build → dist/
+npm run build      # tsc -b && vite build, into dist/
 npm run preview    # serve the production build
 ```
 
-## Deploy to Cloudflare (Workers Static Assets)
+### Deploy
 
-Connected to GitHub via Cloudflare's Workers Builds. On each push, Cloudflare runs
-`npx wrangler deploy`; per `wrangler.toml` that builds the site (`npm run build`) and
-serves `./dist` as a static-assets Worker. Settings:
-
-- Deploy command: `npx wrangler deploy`
-- Build command: can be left blank (the `[build]` step in `wrangler.toml` runs the build).
-
-Locally:
+Hosted on Cloudflare (Workers Static Assets), connected to GitHub. On each push,
+`npx wrangler deploy` runs the build (`npm run build`, per `wrangler.toml`) and serves
+`./dist`. `public/_headers` sets security and caching headers.
 
 ```bash
 npm run deploy     # = npx wrangler deploy (builds, then deploys ./dist)
 ```
 
-`public/_headers` applies security and caching headers; `not_found_handling` falls back
-to the single page. Add `davoigneau.com` as a custom domain in the dashboard.
+### A note on the work referenced
 
-## A note on the work referenced
+Some of the projects described on the site are live systems built for regulated firms.
+**No client identifiers, holdings, account numbers, credentials or screenshots appear
+anywhere in this repository or on the page.** Descriptions are genericised, and every
+figure shown (the chart, the holdings grid) is illustrative or synthetic;
+`src/lib/data.ts` documents this.
 
-Several projects described on the page are live, regulated systems built for a
-licensed brokerage. **No client identifiers, holdings, account numbers, credentials
-or screenshots appear anywhere in this repo or on the page.** Descriptions are
-genericised, and every figure (the chart, the holdings grid) is illustrative or
-synthetic. `src/lib/data.ts` documents this.
+### Accessibility
 
-## Accessibility
-
-Targets **WCAG 2.2 AA**: the chart exposes its full series to assistive tech via an
-offscreen data table and an `aria-label` summary, `aria-sort` on the sortable grid,
-visible focus states, a skip link, contrast-checked text tokens (the muted label
-colour was darkened to clear 4.5:1), and full `prefers-reduced-motion` support.
+Targets WCAG 2.2 AA: the chart exposes its full series to assistive tech via an offscreen
+data table and an `aria-label` summary, `aria-sort` on the sortable grid, visible focus
+states, a skip link, contrast-checked text tokens, and full `prefers-reduced-motion` support.
