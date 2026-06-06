@@ -1,3 +1,4 @@
+import { ArrowDown } from "lucide-react";
 import { Container } from "@/components/ui/section";
 import { METRICS } from "@/lib/site";
 
@@ -23,7 +24,15 @@ export function Metrics() {
       <Container>
         <p className="border-t border-line/60 py-3 text-center text-xs text-ink-3">
           Most time-saved figures are reported by the teams using the tools; the rest are my own
-          estimates. Each project's source is marked in the ledger below.
+          estimates. Each project's source is marked in{" "}
+          <a
+            href="#ledger"
+            className="inline-flex items-center gap-0.5 font-medium text-brand-600 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
+          >
+            the ledger
+            <ArrowDown className="size-3" />
+          </a>
+          .
         </p>
       </Container>
     </div>

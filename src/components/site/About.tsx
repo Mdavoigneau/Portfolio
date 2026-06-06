@@ -47,28 +47,27 @@ export function About() {
           </p>
           <div className="mt-6 space-y-4 text-base leading-relaxed text-ink-2">
             <p>
-              I'm a master's-qualified engineer who builds end-to-end: front-end through to
-              infrastructure, AI agents through to audit logging. I've shipped twenty-two
-              production systems solo; most recently at a Sydney financial institution, across
-              private wealth, funds administration, SMSF, compliance and operations. Before that I
-              ran a repair business end-to-end, which is where I learned firsthand where real-world
-              processes actually break.
+              I'm a master's-qualified software engineer in Sydney, originally from France. I like building things
+              end-to-end, from the front-end down to the box they run on, and I've shipped
+              twenty-two production systems solo so far. Most of that has been at a Sydney financial
+              institution, across private wealth, funds administration, SMSF and compliance. Before
+              that I ran a phone-repair business myself, which taught me more about where real
+              processes break than any course did.
             </p>
             <p>
-              My interest in markets is neither recent nor decorative. It took hold during the 2021
-              crypto cycle, when a close friend (Gauthier, now a quant in Dubai) and I spent the
-              better part of a year reverse-engineering the machinery underneath it: order books and
-              derivatives, market structure, how settlement actually works. We'd argue a thesis,
-              break it, and rebuild it. Years of that later I invest in equities and derivatives
-              myself, which is why presenting financial data the way demanding readers expect comes
-              naturally rather than as a stretch.
+              My interest in markets goes back a while. During the 2021 crypto cycle a close friend,
+              Gauthier (now a quant in Dubai), and I spent the better part of a year trying to
+              understand the machinery underneath it: order books, derivatives, how settlement
+              actually works. We'd take a thesis, argue it, break it, and start again. I still
+              invest in equities and derivatives, and a fair bit of what I build comes from wanting
+              better tools for it.
             </p>
             <p>
-              I work from first principles and in the open: I derive the maths by hand where it
-              matters, put audit logging and human-review gates wherever data is sensitive, and
-              keep the whole estate running on a rounding error of infrastructure. I'm most useful
-              owning a surface end-to-end with minimal supervision, and I'd rather give you a
-              defended "here's exactly what I have and haven't done" than a confident bluff.
+              I work from first principles and try to stay honest about the edges of what I know. I
+              derive the maths by hand when it matters, put audit logging and human-review gates
+              wherever data is sensitive, and keep things lean. I'm happiest owning a problem
+              end-to-end with room to think, and I'll always rather tell you exactly what I have and
+              haven't done than oversell it.
             </p>
           </div>
         </div>

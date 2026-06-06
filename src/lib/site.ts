@@ -1,6 +1,6 @@
 export const SITE = {
   name: "Matteo Davoigneau",
-  role: "Frontend engineer for financial data",
+  role: "Full-stack & AI engineer",
   location: "Sydney, Australia",
   email: "matteo.davoigneau@gmail.com",
   phone: "0481 101 988",

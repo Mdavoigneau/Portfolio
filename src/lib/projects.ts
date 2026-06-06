@@ -84,18 +84,18 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "sma-dashboard",
-    title: "SMA portfolio & risk dashboard",
+    title: "Separately Managed Accounts portfolio & risk dashboard",
     context: "A financial institution · Wealth advisory",
-    status: "ready",
+    status: "prod",
     featured: true,
     summary:
-      "Per-portfolio performance, risk and mandate-compliance for an SMA program, plus an IC meeting workspace.",
+      "Per-portfolio performance, risk and mandate-compliance for a managed-accounts program, plus an investment-committee workspace.",
     detail:
       "The analytics an investment committee actually needs: per-portfolio performance and risk, mandate-compliance checks against allocation bands, holdings-snapshot reconciliation, and an IC workspace for minutes and action items. Earns time on oversight and keeps everyone across what is happening.",
     note:
       "Sharpe, Sortino, beta and Jensen's alpha computed by hand and annualised against the real historical monthly risk-free rate (synced live from the RBA) rather than a hard-coded constant. Mandate breaches detected against live allocation bands; snapshot reconciliation prefers dollar-valued holdings over weights-only.",
     stack: ["Next.js", "React", "TypeScript (strict)", "SQLite", "Recharts"],
-    metrics: [{ label: "~40 hrs/mo", provenance: "self" }],
+    metrics: [{ label: "~40 hrs/mo", provenance: "team" }],
     tags: ["Portfolio workflows", "Financial maths", "Reconciliation"],
   },
   {
@@ -109,7 +109,7 @@ export const PROJECTS: Project[] = [
     detail:
       "Replaced a legacy spreadsheet workflow and decks previously assembled by hand. Builds multi-asset proposals, blends private-credit sub-funds, and exports board-ready PDF and PPTX.",
     note:
-      "Geometric-mean annualisation and three-year compounding from monthly product returns; private-credit sleeves blended as margin + RBA cash rate − fees. Database encrypted at rest (SQLCipher); SSO with per-request session revalidation, so a revoked session dies within one TTL window.",
+      "Geometric-mean annualisation and three-year compounding from monthly product returns; private-credit sleeves blended as margin + RBA cash rate − fees. Database encrypted at rest (SQLCipher); SSO with per-request session revalidation, so a revoked session dies within one TTL window. The encryption and revalidation are there for security: the proposals hold sensitive client financials.",
     stack: ["Node", "Express", "SQLCipher", "SSO", "PPTX / PDF"],
     metrics: [
       { label: "~120 hrs/mo", provenance: "team" },

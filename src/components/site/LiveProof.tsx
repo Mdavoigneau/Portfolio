@@ -122,7 +122,7 @@ export function LiveProof() {
                   <Badge variant="neg">−0.9%</Badge>
                 </div>
                 <p className="mt-3 text-xs leading-relaxed text-ink-3">
-                  Variants via CVA + clsx + tailwind-merge; primitives on Radix; WCAG 2.2 AA focus
+                  Variants via CVA + clsx + tailwind-merge; primitives on Radix; visible focus
                   states and reduced-motion baked in.
                 </p>
               </div>

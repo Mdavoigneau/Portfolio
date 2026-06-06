@@ -1,6 +1,7 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Info } from "lucide-react";
 import { Badge, TechChip } from "@/components/ui/badge";
 import { Container, Section, SectionHead } from "@/components/ui/section";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { MetricPill, ProvenanceLegend, StatusBadge } from "@/components/ui/provenance";
 import { ProjectDialog } from "@/components/site/ProjectDialog";
 import { FEATURED, LEDGER, type Project } from "@/lib/projects";
@@ -58,7 +59,7 @@ export function SelectedWork() {
                 Systems people <span className="font-serif italic text-brand-700">rely</span> on.
               </>
             }
-            lead="Production work across private wealth, funds administration, SMSF and compliance, plus a business of my own, an MP's office, and quant research. Client identifiers, holdings and credentials are deliberately omitted; every figure is marked with its source."
+            lead="Production work across private wealth, funds administration, SMSF and compliance, plus a business of my own, an MP's office, and quant research."
           />
           <a
             href="#ledger"
@@ -69,8 +70,23 @@ export function SelectedWork() {
           </a>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 flex items-center gap-2.5">
           <ProvenanceLegend />
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                type="button"
+                aria-label="A note on confidentiality"
+                className="grid size-5 shrink-0 place-items-center rounded-full border border-line text-ink-3 transition-colors hover:border-brand-line hover:text-brand-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
+              >
+                <Info className="size-3" />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent className="max-w-[18rem] leading-relaxed">
+              These are live, regulated systems: client identifiers, holdings and credentials are
+              deliberately omitted, and every figure is illustrative or synthetic.
+            </TooltipContent>
+          </Tooltip>
         </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">

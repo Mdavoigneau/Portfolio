@@ -22,7 +22,7 @@ export function Hero() {
 
       <Container className="grid items-center gap-12 pb-20 pt-16 md:grid-cols-12 md:pb-28 md:pt-24">
         <div className="min-w-0 md:col-span-6 lg:col-span-5">
-          <Eyebrow className="reveal">Frontend engineer · Sydney · financial data</Eyebrow>
+          <Eyebrow className="reveal">Full-stack & AI engineer · Sydney</Eyebrow>
           <h1 className="reveal mt-4 text-[2rem] leading-[1.06] tracking-tight text-ink sm:text-[2.75rem] sm:leading-[1.04] lg:text-6xl">
             I build the financial-data surfaces sophisticated readers{" "}
             <span className="swash text-brand-700">

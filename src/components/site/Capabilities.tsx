@@ -1,9 +1,9 @@
 import {
   BarChart3,
-  Braces,
   Compass,
-  Component,
   Landmark,
+  Layers,
+  ShieldCheck,
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
@@ -19,34 +19,34 @@ interface Capability {
 
 const CAPABILITIES: Capability[] = [
   {
-    icon: Component,
-    title: "Design systems for data-dense domains",
-    body: "Foundations → Components → Patterns → Templates, owned end-to-end and held to the line on consistency, visual polish and WCAG 2.2 AA. A reusable component system shared across the whole estate.",
-    evidence: "Tokens, CVA + clsx + tailwind-merge, Radix primitives: exactly this page.",
-  },
-  {
-    icon: BarChart3,
-    title: "Data tables & charting that carry the workflow",
-    body: "Headless tables (TanStack / AG Grid) styled from my own tokens, and charts built from primitives (D3 + raw SVG) when the chart is the product. I reach for a charting library only when it's plumbing, not the point.",
-    evidence: "The live grid and raw-SVG chart above are the demonstration.",
+    icon: Layers,
+    title: "End-to-end, front-end to infrastructure",
+    body: "I build whole verticals on my own: a typed React front-end, the API and relational schema behind it, auth and audit logging, and the box it runs on. No layer of the stack is left to someone else.",
+    evidence: "Every system here: UI, data model, deploy, backups.",
   },
   {
     icon: Sparkles,
-    title: "AI UX inside serious tools",
-    body: "Streaming, grounding and human-in-the-loop as first-class UX, not bolt-ons: NDJSON-streamed agent steps, answers cited to their source, and a human reading the evidence before anything is approved.",
-    evidence: "On-device document agent · AI compliance reviewer · MCP tool surfaces.",
+    title: "AI that ships, not demos",
+    body: "Retrieval-augmented drafting over thousands of real emails, an on-device document agent, vision OCR, and Claude exposed as live tools over MCP. Streaming, grounded in sources, with a human in the loop.",
+    evidence: "On-device SMSF agent · MP email RAG · compliance reviewer · MCP tools.",
   },
   {
-    icon: Braces,
-    title: "Typed contracts over relational data",
-    body: "TypeScript in strict mode end-to-end, Zod-validated boundaries, and a typed client over the database. Schemas as the single source of truth for the UI, the exports and the API alike.",
-    evidence: "PostgreSQL / SQLite (WAL), Zod, typed envelopes on every route.",
+    icon: ShieldCheck,
+    title: "Security & compliance by default",
+    body: "Encryption at rest (AES-256-GCM, SQLCipher), SSO with per-request revalidation, append-only audit ledgers, and human-review gates. Built for regulated data from the first commit.",
+    evidence: "Fund ledger · SMSF intake · proposal engine · compliance reviewer.",
+  },
+  {
+    icon: BarChart3,
+    title: "Interfaces that present numbers people act on",
+    body: "Dashboards, sortable tables and charts built from primitives (raw SVG, no wrapper when the chart is the point). The detail a reader needs, without the clutter.",
+    evidence: "The live chart and grid above · risk dashboards · price analytics.",
   },
   {
     icon: Landmark,
     title: "Finance, spoken natively",
     body: "NAV and FSC-17 unit pricing, double-entry ledgers, risk statistics, geometric annualisation, margin blends. I present financial data the way sophisticated readers expect it, and I invest in equities and derivatives myself.",
-    evidence: "Fund-admin ledger · SMA risk dashboard · proposal engine · quant research.",
+    evidence: "Fund-admin ledger · managed-accounts dashboard · proposal engine · quant research.",
   },
   {
     icon: Compass,
@@ -61,14 +61,14 @@ export function Capabilities() {
     <Section id="capabilities">
       <Container>
         <SectionHead
-          eyebrow="Capabilities"
+          eyebrow="How I work"
           title={
             <>
-              Built for a data-dense{" "}
-              <span className="font-serif italic text-brand-700">product surface</span>.
+              The same few <span className="font-serif italic text-brand-700">strengths</span>,
+              across very different work.
             </>
           }
-          lead="The throughline across the work above, and what I bring to a serious, data-dense financial product."
+          lead="Across the systems above, in finance, telecoms, an MP's office and ventures of my own, the same patterns keep showing up."
         />
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">

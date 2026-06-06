@@ -15,8 +15,8 @@ export function Contact() {
               <span className="font-serif italic text-brand-700">it's worth building well</span>.
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink-2">
-              I'm open to a conversation about owning the product surface of a serious financial
-              tool, end-to-end. The fastest way to reach me is email or a call.
+              Always happy to talk, whether it's about a role, a project, or just comparing notes.
+              Email or a call is the quickest way to reach me.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

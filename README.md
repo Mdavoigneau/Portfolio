@@ -63,6 +63,6 @@ figure shown (the chart, the holdings grid) is illustrative or synthetic;
 
 ### Accessibility
 
-Targets WCAG 2.2 AA: the chart exposes its full series to assistive tech via an offscreen
+Accessibility: the chart exposes its full series to assistive tech via an offscreen
 data table and an `aria-label` summary, `aria-sort` on the sortable grid, visible focus
 states, a skip link, contrast-checked text tokens, and full `prefers-reduced-motion` support.
