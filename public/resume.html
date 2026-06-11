@@ -99,18 +99,18 @@ footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);display
 @media (prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none;}.card{transition:none;}}
 
 @media print{
-  @page{size:A4;margin:13mm 14mm 11mm;}
-  body{background:#fff;padding:0;font-size:10.1pt;line-height:1.42;}
+  @page{size:A4;margin:11mm 14mm 9mm;}
+  body{background:#fff;padding:0;font-size:9.9pt;line-height:1.38;}
   .page{max-width:none;margin:0;padding:0;border-radius:0;box-shadow:none;}
   .reveal{opacity:1!important;transform:none!important;animation:none!important;}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   .name{font-size:27pt;}
-  .pitch{font-size:10.8pt;max-width:none;margin-top:11px;line-height:1.4;}
-  .focus{margin-top:10px;}
-  section{margin-top:10pt;}
-  .sectop{padding-bottom:6px;margin-bottom:8px;}
-  .entry{margin-bottom:7px;}
-  ul{margin-top:4px;gap:2px;}
+  .pitch{font-size:10.5pt;max-width:none;margin-top:8px;line-height:1.38;}
+  .focus{margin-top:8px;}
+  section{margin-top:8pt;}
+  .sectop{padding-bottom:4px;margin-bottom:6px;}
+  .entry{margin-bottom:5px;}
+  ul{margin-top:3px;gap:1px;}
   .projects{break-before:page;}
   .cards{gap:6px;}
   .card{padding:7px 10px;gap:3px;}
@@ -144,11 +144,11 @@ footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);display
       0481 101 988<br>Sydney, Australia<br><a href="https://davoigneau.com">davoigneau.com</a>
     </div>
     <p class="pitch">
-      Master&rsquo;s-qualified engineer building automated workflows and data-driven tools &ndash; React/TypeScript front-ends through to APIs and infrastructure. Strong at analysing processes, designing reliable systems and delivering end-to-end solutions. In Q1 2026 at a licensed Sydney brokerage, shipped <b>24 production systems</b> into users&rsquo; hands, recovering <b>~400 hours a month</b>, or around $250k a year.
+      Master&rsquo;s-qualified engineer building automated workflows and data-driven tools &ndash; React/TypeScript front-ends through to APIs and infrastructure. Strong at analysing processes, designing reliable systems and delivering end-to-end solutions. Since joining a licensed Sydney brokerage, shipped <b>24 production systems</b> into users&rsquo; hands, recovering <b>~400 hours a month</b>, or around $250k a year.
     </p>
     <div class="focus pillrow">
       <span class="pill pill-soft">Full-stack delivery</span>
-      <span class="pill pill-soft">Process design</span>
+      <span class="pill pill-soft">System design</span>
       <span class="pill pill-soft">Production infrastructure &amp; governance</span>
       <span class="pill pill-soft">API integration</span>
       <span class="pill pill-soft">Frontend performance</span>
@@ -162,9 +162,10 @@ footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);display
       <div class="erow"><div class="etitle">Full-Stack &amp; AI Engineer <span class="eorg">· Rivkin Securities, Sydney</span></div><div class="edate">Feb 2026 &ndash; present</div></div>
       <ul>
         <li>Shipped 24 production systems across Private Wealth, Advisory, SMSF, Marketing and Operations. The whole portfolio is running on roughly <b class="metric">$190/month</b> of infrastructure while recovering an estimated <b class="metric">$250k/year</b> in staff time (estimated by the teams themselves, and not counting every project).</li>
+        <li>Built with the teams, not just for them &ndash; requirements gathered directly from five business units, review gates instituted through the firm&rsquo;s AI-delivery governance (which I own), and internal training I lead on AI-assisted delivery for technical and non-technical staff.</li>
         <li>Built the front-ends in <b>React 19 / Next.js 16 / TypeScript</b> &ndash; a reusable component system (shadcn / base-ui) shared across products, data-dense admin dashboards, multi-step forms with auto-save, and SVG-based data visualisations, tuned for fast loads (standalone builds, route-level code-splitting).</li>
         <li>Wired those UIs to live data &ndash; REST / OAuth API integrations, SQLite / PostgreSQL and an OAuth 2.1 Claude MCP server &ndash; with auth, audit logging, encrypted backups and human-review gates wherever sensitive data is involved.</li>
-        <li>Core stack: Next.js 16 / React 19 / TypeScript, Python, AWS Lightsail + Caddy, GCP, Anthropic Claude API + MCP, Playwright. Own the firm&rsquo;s AI-delivery governance and lead internal training on AI-assisted delivery.</li>
+        <li>Core stack: Next.js 16 / React 19 / TypeScript, Python, AWS Lightsail + Caddy, GCP, Anthropic Claude API + MCP, with Playwright E2E test suites wired into CI/CD.</li>
       </ul>
     </div>
     <div class="entry">
@@ -266,7 +267,7 @@ footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);display
       <div class="tgroup"><span class="tlabel">Data</span><div class="pillrow"><span class="pill">SQL</span><span class="pill">PostgreSQL</span><span class="pill">SQLite</span><span class="pill">Qdrant</span></div></div>
       <div class="tgroup"><span class="tlabel">Infra / DevOps</span><div class="pillrow"><span class="pill">AWS Lightsail</span><span class="pill">GCP Cloud Run</span><span class="pill">Docker</span><span class="pill">Caddy</span><span class="pill">CI/CD</span></div></div>
       <div class="tgroup"><span class="tlabel">AI</span><div class="pillrow"><span class="pill">Claude API + MCP</span><span class="pill">On-device LLMs</span><span class="pill">Agent design</span><span class="pill">OCR</span></div></div>
-      <div class="tgroup"><span class="tlabel">Automation</span><div class="pillrow"><span class="pill">Selenium</span><span class="pill">Playwright</span><span class="pill">ActiveCampaign</span></div></div>
+      <div class="tgroup"><span class="tlabel">Testing &amp; automation</span><div class="pillrow"><span class="pill">Playwright E2E</span><span class="pill">Selenium</span><span class="pill">ActiveCampaign</span></div></div>
     </div>
     <div class="tfull duo">
       <div class="tgroup"><span class="tlabel">Languages</span><p class="langline">Fluent in English and French</p></div>
