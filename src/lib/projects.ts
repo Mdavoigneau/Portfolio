@@ -8,7 +8,7 @@
  */
 
 export type Provenance = "team" | "self" | "fact" | "qual";
-export type Status = "prod" | "ready";
+export type Status = "prod" | "ready" | "dev";
 
 export interface Metric {
   label: string;
@@ -44,6 +44,7 @@ export const PROVENANCE_LABEL: Record<Provenance, string> = {
 export const STATUS_LABEL: Record<Status, string> = {
   prod: "In production",
   ready: "Ready · awaiting sign-off",
+  dev: "In development",
 };
 
 export const PROJECTS: Project[] = [
@@ -70,7 +71,7 @@ export const PROJECTS: Project[] = [
     id: "unit-trust",
     title: "Wholesale unit-trust ledger & daily NAV",
     context: "A financial institution · Funds administration",
-    status: "prod",
+    status: "dev",
     featured: true,
     summary:
       "A fund-administration backbone where compliance is enforced by the database. The first system of its kind at the firm.",
@@ -206,7 +207,7 @@ export const PROJECTS: Project[] = [
     id: "asx-scanner",
     title: "Hybrid live ASX scanner",
     context: "A financial institution · Research",
-    status: "ready",
+    status: "prod",
     featured: false,
     summary:
       "Ranks the ASX universe daily, then overlays live Interactive Brokers ticks only for the candidates that matter.",

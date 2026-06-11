@@ -46,7 +46,7 @@ export function ProjectLedger() {
               Every system, <span className="font-serif italic text-brand-700">accounted for</span>.
             </>
           }
-          lead={`All ${LEDGER.length} shipped solo, ${inProd} of them in production. Each figure is marked with where it came from. Open any row for the detail.`}
+          lead={`All ${LEDGER.length} built solo, ${inProd} of them in production. Each figure is marked with where it came from. Open any row for the detail.`}
         />
 
         <div className="mt-6">

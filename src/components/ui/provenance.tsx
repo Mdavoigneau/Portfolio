@@ -55,7 +55,7 @@ export function MetricPill({ metric, className }: { metric: Metric; className?: 
   );
 }
 
-/** Status: In production (green) vs Ready, awaiting sign-off (gold). */
+/** Status: In production (green), Ready awaiting sign-off (gold), In dev (grey). */
 export function StatusBadge({ status, className }: { status: Status; className?: string }) {
   const isProd = status === "prod";
   return (
@@ -68,9 +68,12 @@ export function StatusBadge({ status, className }: { status: Status; className?:
       )}
     >
       <span
-        className={cn("size-1.5 rounded-full", isProd ? "bg-pos" : "bg-[var(--color-series-3)]")}
+        className={cn(
+          "size-1.5 rounded-full",
+          isProd ? "bg-pos" : status === "ready" ? "bg-[var(--color-series-3)]" : "bg-ink-3"
+        )}
       />
-      {isProd ? "In production" : "Ready"}
+      {isProd ? "In production" : status === "ready" ? "Ready" : "In dev"}
     </span>
   );
 }
