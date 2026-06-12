@@ -86,9 +86,16 @@ b.metric{color:var(--ink);font-weight:680;}
 footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;
   gap:12px;font-size:11.5px;color:var(--muted);flex-wrap:wrap;}
 
+.pdf-btn{position:fixed;top:18px;right:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;
+  background:#18553f;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;padding:11px 18px;
+  border-radius:9999px;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.18);}
+
 @media (max-width:720px){
   body{padding:0;}
   .page{padding:36px 22px;border-radius:0;box-shadow:none;}
+  /* The page card fills the viewport on mobile, so a top-fixed button covers
+     the header. Float it bottom-right instead, clear of the home indicator. */
+  .pdf-btn{top:auto;bottom:calc(16px + env(safe-area-inset-bottom));right:16px;}
   .hero{grid-template-columns:1fr;}
   .contact{grid-column:1;grid-row:auto;text-align:left;margin-top:4px;}
   .cards{grid-template-columns:1fr;}
@@ -129,8 +136,7 @@ footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);display
 </head>
 <body>
 <style>@media print{.no-print{display:none!important}}</style>
-<a class="no-print" href="Matteo-Davoigneau-Resume.pdf" download="Matteo-Davoigneau-Resume.pdf"
-   style="position:fixed;top:18px;right:18px;z-index:9999;display:inline-flex;align-items:center;gap:6px;background:#18553f;color:#fff;font:600 13px/1 system-ui,-apple-system,sans-serif;padding:11px 18px;border-radius:9999px;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.18)">Download PDF &darr;</a>
+<a class="no-print pdf-btn" href="Matteo-Davoigneau-Resume.pdf" download="Matteo-Davoigneau-Resume.pdf">Download PDF &darr;</a>
 <div class="page">
 
   <header class="hero reveal">

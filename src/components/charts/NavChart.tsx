@@ -23,9 +23,28 @@ const MARGIN = { top: 16, right: 18, bottom: 28, left: 44 };
  */
 export function NavChart({ series, height = 320, className }: NavChartProps) {
   const wrapRef = React.useRef<HTMLDivElement>(null);
+  const tipRef = React.useRef<HTMLDivElement>(null);
   const [width, setWidth] = React.useState(320);
+  const [tipWidth, setTipWidth] = React.useState(160);
   const [active, setActive] = React.useState<number | null>(null);
   const [showBench, setShowBench] = React.useState(true);
+
+  React.useLayoutEffect(() => {
+    const w = tipRef.current?.offsetWidth;
+    if (w) setTipWidth(w);
+  }, [active, showBench]);
+
+  // A touch-pinned crosshair stays up after finger-up; tapping anywhere
+  // outside the chart dismisses it.
+  const pinned = active !== null;
+  React.useEffect(() => {
+    if (!pinned) return;
+    const onDocPointerDown = (e: PointerEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setActive(null);
+    };
+    document.addEventListener("pointerdown", onDocPointerDown);
+    return () => document.removeEventListener("pointerdown", onDocPointerDown);
+  }, [pinned]);
 
   React.useEffect(() => {
     const el = wrapRef.current;
@@ -79,6 +98,11 @@ export function NavChart({ series, height = 320, className }: NavChartProps) {
 
   const idx = active ?? n - 1;
   const cur = series[idx];
+
+  // X labels stay yearly while there's room, then thin to every 2/4 years on
+  // narrow charts. Periodic labels crowding the end label get dropped.
+  const plotW = width - MARGIN.left - MARGIN.right;
+  const labelStep = 12 * Math.max(1, Math.ceil(n / (12 * Math.max(2, Math.floor(plotW / 72)))));
 
   function pointerToIndex(clientX: number): number {
     const el = wrapRef.current;
@@ -138,9 +162,16 @@ export function NavChart({ series, height = 320, className }: NavChartProps) {
       <div
         ref={wrapRef}
         className="relative w-full select-none overflow-hidden"
-        style={{ height }}
+        style={{ height, touchAction: "pan-y", WebkitTouchCallout: "none" }}
+        onPointerDown={(e) => {
+          if (e.pointerType === "touch") e.currentTarget.setPointerCapture(e.pointerId);
+          setActive(pointerToIndex(e.clientX));
+        }}
         onPointerMove={(e) => setActive(pointerToIndex(e.clientX))}
-        onPointerLeave={() => setActive(null)}
+        onPointerLeave={(e) => {
+          // Touch fires leave on finger-up; keep the crosshair pinned instead.
+          if (e.pointerType !== "touch") setActive(null);
+        }}
       >
         <svg
           width={width}
@@ -183,7 +214,7 @@ export function NavChart({ series, height = 320, className }: NavChartProps) {
 
           {/* x labels: sparse, with ends anchored inward so they never clip */}
           {series
-            .filter((_, i) => i % 12 === 0 || i === n - 1)
+            .filter((d) => d.t === n - 1 || (d.t % labelStep === 0 && x(n - 1) - x(d.t) > 72))
             .map((d) => (
               <text
                 key={d.t}
@@ -253,9 +284,13 @@ export function NavChart({ series, height = 320, className }: NavChartProps) {
         {/* Floating readout */}
         {cur && active !== null && (
           <div
-            className="pointer-events-none absolute top-2 z-10 rounded-lg border border-line bg-surface/95 px-3 py-2 text-xs shadow-raised backdrop-blur"
+            ref={tipRef}
+            className="pointer-events-none absolute top-2 z-10 w-max rounded-lg border border-line bg-surface/95 px-3 py-2 text-xs shadow-raised backdrop-blur"
             style={{
-              left: Math.min(Math.max(x(cur.t) - 70, 4), width - 144),
+              left: Math.min(
+                Math.max(x(cur.t) - tipWidth / 2, 4),
+                Math.max(width - tipWidth - 4, 4)
+              ),
             }}
           >
             <div className="mb-1 font-mono text-[10px] uppercase tracking-wider text-ink-3">
@@ -280,7 +315,7 @@ export function NavChart({ series, height = 320, className }: NavChartProps) {
       </div>
 
       <p className="mt-3 font-mono text-[11px] leading-relaxed text-ink-3">
-        Raw SVG · d3-scale axes · d3-shape path geometry · rendered by hand. No charting library. Hover to read any month.
+        Raw SVG · d3-scale axes · d3-shape path geometry · rendered by hand. No charting library. Hover or drag to read any month.
       </p>
 
       {/* Offscreen data table for assistive technology */}
