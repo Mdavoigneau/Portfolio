@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +8,16 @@ import {
 } from "@/components/ui/dialog";
 import { Badge, TechChip } from "@/components/ui/badge";
 import { MetricPill, StatusBadge } from "@/components/ui/provenance";
+import { DEMOS } from "@/components/demos";
 import { type Project } from "@/lib/projects";
+
+function DemoFallback() {
+  return (
+    <div className="grid h-48 place-items-center">
+      <span className="animate-pulse font-mono text-xs text-ink-3">Loading the demo</span>
+    </div>
+  );
+}
 
 /** Wraps any trigger element; opens a details dialog for the project. */
 export function ProjectDialog({
@@ -18,10 +27,12 @@ export function ProjectDialog({
   project: Project;
   children: ReactNode;
 }) {
+  const demo = DEMOS[project.id];
+
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent>
+      <DialogContent className={demo ? "w-[min(56rem,calc(100vw_-_2rem))]" : undefined}>
         <div className="p-6 md:p-7">
           <div className="mb-3 flex flex-wrap items-center gap-2 pr-8">
             <span className="eyebrow">{project.context}</span>
@@ -34,6 +45,28 @@ export function ProjectDialog({
           <DialogDescription className="mt-2.5 text-sm leading-relaxed text-ink-2">
             {project.detail}
           </DialogDescription>
+
+          {demo ? (
+            <section
+              aria-label="Interactive demo"
+              className="mt-5 overflow-hidden rounded-xl border border-line bg-elevated"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 border-b border-line px-4 py-2.5 md:px-5">
+                <span className="eyebrow">Interactive demo</span>
+                <Badge variant="mint" size="sm">
+                  Synthetic data · runs in your browser
+                </Badge>
+              </div>
+              <p className="border-b border-line bg-elevated px-4 py-2.5 text-xs leading-relaxed text-ink-2 md:px-5">
+                {demo.caption}
+              </p>
+              <div className="bg-surface p-4 md:p-5">
+                <Suspense fallback={<DemoFallback />}>
+                  <demo.Component />
+                </Suspense>
+              </div>
+            </section>
+          ) : null}
 
           <div className="mt-4 flex flex-wrap gap-2">
             {project.metrics.map((m, i) => (

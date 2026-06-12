@@ -1,13 +1,15 @@
-import { ArrowRight, Info } from "lucide-react";
+import { ArrowRight, Info, Play } from "lucide-react";
 import { Badge, TechChip } from "@/components/ui/badge";
 import { Container, Section, SectionHead } from "@/components/ui/section";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { MetricPill, ProvenanceLegend, StatusBadge } from "@/components/ui/provenance";
 import { ProjectDialog } from "@/components/site/ProjectDialog";
+import { hasDemo } from "@/components/demos";
 import { FEATURED, LEDGER, type Project } from "@/lib/projects";
 
 function WorkCard({ p }: { p: Project }) {
   const primary = p.metrics[0];
+  const demo = hasDemo(p.id);
   return (
     <ProjectDialog project={p}>
       <button
@@ -38,7 +40,14 @@ function WorkCard({ p }: { p: Project }) {
             ))}
           </div>
           <span className="inline-flex items-center gap-1 text-xs font-medium text-brand-600">
-            View details
+            {demo ? (
+              <>
+                <Play className="size-3" aria-hidden />
+                Try the interactive demo
+              </>
+            ) : (
+              "View details"
+            )}
             <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
           </span>
         </div>
@@ -87,6 +96,12 @@ export function SelectedWork() {
               deliberately omitted, and every figure is illustrative or synthetic.
             </TooltipContent>
           </Tooltip>
+          <span className="inline-flex items-center gap-1.5 text-xs text-ink-3">
+            <span className="grid size-4 shrink-0 place-items-center rounded-full bg-mint">
+              <Play className="size-2.5 text-mint-deep" aria-hidden />
+            </span>
+            working miniature inside, on synthetic data
+          </span>
         </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">

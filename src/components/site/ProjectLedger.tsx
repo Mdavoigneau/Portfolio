@@ -1,7 +1,8 @@
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Play } from "lucide-react";
 import { Container, Section, SectionHead } from "@/components/ui/section";
 import { ProvenanceDot, ProvenanceLegend, StatusBadge } from "@/components/ui/provenance";
 import { ProjectDialog } from "@/components/site/ProjectDialog";
+import { hasDemo } from "@/components/demos";
 import { LEDGER, type DatedProject } from "@/lib/projects";
 
 function LedgerRow({ project }: { project: DatedProject }) {
@@ -23,6 +24,15 @@ function LedgerRow({ project }: { project: DatedProject }) {
             <span className="tnum hidden items-center gap-1.5 text-xs text-ink-2 sm:inline-flex">
               {primary.label}
               <ProvenanceDot provenance={primary.provenance} />
+            </span>
+          ) : null}
+          {hasDemo(project.id) ? (
+            <span
+              title="Working miniature inside, on synthetic data"
+              className="grid size-5 shrink-0 place-items-center rounded-full bg-mint"
+            >
+              <Play className="size-2.5 text-mint-deep" aria-hidden />
+              <span className="sr-only">Has an interactive demo</span>
             </span>
           ) : null}
           <StatusBadge status={project.status} />

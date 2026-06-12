@@ -68,11 +68,27 @@ export const PROJECTS: Project[] = [
 
   // ── A financial institution ────────────────────────────────────────────────
   {
+    id: "smsf-intake",
+    title: "SMSF intake platform",
+    context: "A financial institution · SMSF (white-label, adaptable to any enterprise)",
+    status: "prod",
+    featured: true,
+    summary:
+      "Multi-channel SMSF fund-formation intake, built to be re-skinned for bespoke clients.",
+    detail:
+      "Clients fill in their own details, so advisers and SMSF staff stop chasing information. Deliberately architected as a white-label platform: the same engine re-skins for a new client or use-case in days, not weeks.",
+    note:
+      "AES-256-GCM-encrypted PII with deterministic email hashing for lookup; dual B2B/B2C channels isolated at the schema level with independent CRM routing; everything driven from a single typed questions config so the form, validators, exports and admin views never drift. Shipped with unit + browser test coverage.",
+    stack: ["Next.js", "TypeScript (strict)", "SQLite", "AES-256-GCM", "Zod"],
+    metrics: [{ label: "~20 hrs/adviser·mo", provenance: "self" }],
+    tags: ["White-label", "Security", "Typed contracts"],
+  },
+  {
     id: "unit-trust",
     title: "Wholesale unit-trust ledger & daily NAV",
     context: "A financial institution · Funds administration",
     status: "dev",
-    featured: true,
+    featured: false,
     summary:
       "A fund-administration backbone where compliance is enforced by the database. The first system of its kind at the firm.",
     detail:
@@ -186,22 +202,6 @@ export const PROJECTS: Project[] = [
       { label: "12 live pages", provenance: "fact" },
     ],
     tags: ["Ship fast + governed", "Cost discipline"],
-  },
-  {
-    id: "smsf-intake",
-    title: "SMSF intake platform",
-    context: "A financial institution · SMSF (white-label, adaptable to any enterprise)",
-    status: "prod",
-    featured: false,
-    summary:
-      "Multi-channel SMSF fund-formation intake, built to be re-skinned for bespoke clients.",
-    detail:
-      "Clients fill in their own details, so advisers and SMSF staff stop chasing information. Deliberately architected as a white-label platform: the same engine re-skins for a new client or use-case in days, not weeks.",
-    note:
-      "AES-256-GCM-encrypted PII with deterministic email hashing for lookup; dual B2B/B2C channels isolated at the schema level with independent CRM routing; everything driven from a single typed questions config so the form, validators, exports and admin views never drift. Shipped with unit + browser test coverage.",
-    stack: ["Next.js", "TypeScript (strict)", "SQLite", "AES-256-GCM", "Zod"],
-    metrics: [{ label: "~20 hrs/adviser·mo", provenance: "self" }],
-    tags: ["White-label", "Security", "Typed contracts"],
   },
   {
     id: "asx-scanner",
