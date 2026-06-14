@@ -1,15 +1,16 @@
-import { ArrowRight, Info, Play } from "lucide-react";
+import { ArrowRight, Info, Play, SquareArrowOutUpRight } from "lucide-react";
 import { Badge, TechChip } from "@/components/ui/badge";
 import { Container, Section, SectionHead } from "@/components/ui/section";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { MetricPill, ProvenanceLegend, StatusBadge } from "@/components/ui/provenance";
 import { ProjectDialog } from "@/components/site/ProjectDialog";
-import { hasDemo } from "@/components/demos";
+import { hasDemo, hasDemoPage } from "@/components/demos";
 import { FEATURED, LEDGER, type Project } from "@/lib/projects";
 
 function WorkCard({ p }: { p: Project }) {
   const primary = p.metrics[0];
   const demo = hasDemo(p.id);
+  const demoPage = hasDemoPage(p.id);
   return (
     <ProjectDialog project={p}>
       <button
@@ -44,6 +45,11 @@ function WorkCard({ p }: { p: Project }) {
               <>
                 <Play className="size-3" aria-hidden />
                 Try the interactive demo
+              </>
+            ) : demoPage ? (
+              <>
+                <SquareArrowOutUpRight className="size-3" aria-hidden />
+                Open the live dashboard
               </>
             ) : (
               "View details"

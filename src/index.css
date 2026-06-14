@@ -228,3 +228,21 @@
     opacity: 0;
   }
 }
+
+/* Live-tick cell flash (ASX scanner demo): a quick tint that fades to transparent. */
+@keyframes flashUp {
+  from {
+    background-color: color-mix(in srgb, var(--color-pos) 22%, transparent);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+@keyframes flashDown {
+  from {
+    background-color: color-mix(in srgb, var(--color-neg) 22%, transparent);
+  }
+  to {
+    background-color: transparent;
+  }
+}

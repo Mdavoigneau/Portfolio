@@ -1,4 +1,5 @@
 import { Suspense, type ReactNode } from "react";
+import { ArrowUpRight } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -7,8 +8,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Badge, TechChip } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { MetricPill, StatusBadge } from "@/components/ui/provenance";
-import { DEMOS } from "@/components/demos";
+import { DEMOS, DEMO_PAGES } from "@/components/demos";
 import { type Project } from "@/lib/projects";
 
 function DemoFallback() {
@@ -28,6 +30,7 @@ export function ProjectDialog({
   children: ReactNode;
 }) {
   const demo = DEMOS[project.id];
+  const page = DEMO_PAGES[project.id];
 
   return (
     <Dialog>
@@ -52,7 +55,7 @@ export function ProjectDialog({
               className="mt-5 overflow-hidden rounded-xl border border-line bg-elevated"
             >
               <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 border-b border-line px-4 py-2.5 md:px-5">
-                <span className="eyebrow">Interactive demo</span>
+                <span className="eyebrow">{demo.eyebrow ?? "Interactive demo"}</span>
                 <Badge variant="mint" size="sm">
                   Synthetic data · runs in your browser
                 </Badge>
@@ -64,6 +67,31 @@ export function ProjectDialog({
                 <Suspense fallback={<DemoFallback />}>
                   <demo.Component />
                 </Suspense>
+              </div>
+            </section>
+          ) : null}
+
+          {page ? (
+            <section
+              aria-label="Interactive demo"
+              className="mt-5 overflow-hidden rounded-xl border border-line bg-elevated"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 border-b border-line px-4 py-2.5 md:px-5">
+                <span className="eyebrow">{page.eyebrow ?? "Interactive demo"}</span>
+                <Badge variant="mint" size="sm">
+                  Synthetic data · full page
+                </Badge>
+              </div>
+              <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-4 md:px-5">
+                <p className="min-w-0 flex-1 text-xs leading-relaxed text-ink-2">
+                  {page.caption}
+                </p>
+                <Button asChild size="sm" className="shrink-0">
+                  <a href={page.href} target="_blank" rel="noopener noreferrer">
+                    {page.cta}
+                    <ArrowUpRight className="size-4" />
+                  </a>
+                </Button>
               </div>
             </section>
           ) : null}

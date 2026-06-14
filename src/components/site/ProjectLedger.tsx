@@ -1,8 +1,8 @@
-import { ChevronRight, Play } from "lucide-react";
+import { ChevronRight, Play, SquareArrowOutUpRight } from "lucide-react";
 import { Container, Section, SectionHead } from "@/components/ui/section";
 import { ProvenanceDot, ProvenanceLegend, StatusBadge } from "@/components/ui/provenance";
 import { ProjectDialog } from "@/components/site/ProjectDialog";
-import { hasDemo } from "@/components/demos";
+import { hasDemo, hasDemoPage } from "@/components/demos";
 import { LEDGER, type DatedProject } from "@/lib/projects";
 
 function LedgerRow({ project }: { project: DatedProject }) {
@@ -33,6 +33,14 @@ function LedgerRow({ project }: { project: DatedProject }) {
             >
               <Play className="size-2.5 text-mint-deep" aria-hidden />
               <span className="sr-only">Has an interactive demo</span>
+            </span>
+          ) : hasDemoPage(project.id) ? (
+            <span
+              title="Opens a full live dashboard, on synthetic data"
+              className="grid size-5 shrink-0 place-items-center rounded-full bg-mint"
+            >
+              <SquareArrowOutUpRight className="size-2.5 text-mint-deep" aria-hidden />
+              <span className="sr-only">Opens a full interactive dashboard</span>
             </span>
           ) : null}
           <StatusBadge status={project.status} />

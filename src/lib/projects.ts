@@ -366,13 +366,13 @@ export const PROJECTS: Project[] = [
     status: "ready",
     featured: false,
     summary:
-      "Turns tens of millions of SMS/email delivery events into readable diagnostics for a telecoms operator.",
+      "Turns billions of SMS, email, voice and fax delivery events into readable diagnostics for a telecoms operator.",
     detail:
-      "Root-cause analysis of delivery failures, regional variance and channel quality over an Elasticsearch cluster, replacing manual log-grepping and spreadsheets. Built as a proof of concept during my apprenticeship; management never formally shipped it, but the team adopted it and kept using it.",
+      "Multi-channel delivery diagnostics (SMS, email, voice and fax) over an Elasticsearch cluster: delivery-failure causes, geographic distribution by destination country, and per-channel quality, reconciling billing records against message events. Replaced manual log-grepping and spreadsheets. Built as a proof of concept during my apprenticeship; management never formally shipped it, but the team adopted it and kept using it.",
     note:
-      "Dynamic index selection by date range over a three-node ES cluster to query billions of events efficiently; logarithmic visualisation of skewed distributions; phone-number validation with libphonenumber to geolocate failures.",
-    stack: ["Node.js", "Express", "Elasticsearch", "Chart.js", "amCharts"],
-    metrics: [{ label: "32M+ messages indexed", provenance: "fact" }],
+      "Sits on an Elasticsearch cluster holding billions of delivery events (indexed by the upstream pipeline, not the dashboard); month-partitioned index selection by date range (monthly message-v7.* and edr-v3.* indices) keeps each query to just the months it needs. Nested deliveryStatus, cause and description aggregations drive the breakdown charts; the board reconciles two independent sources per channel (EDR billing records against CEO message events); libphonenumber normalises numbers to geolocate failures onto an amCharts world map. Built on Next.js and shadcn/ui (Recharts charts, a TanStack tracker table, a period comparator), with light and dark themes.",
+    stack: ["Next.js", "React", "TypeScript", "Elasticsearch", "Recharts", "amCharts"],
+    metrics: [{ label: "Queries billions of events", provenance: "fact" }],
     tags: ["Data at scale", "Diagnostics"],
   },
 
