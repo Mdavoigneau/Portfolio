@@ -18,8 +18,9 @@ const MARGIN = { top: 16, right: 18, bottom: 28, left: 44 };
  *
  * Charting from first principles: d3-scale builds the axes, d3-shape generates
  * the path geometry, and every element below is raw SVG rendered by hand, with no
- * Recharts, no Chart.js, no wrapper. Interactive (pointer + keyboard) with an
- * offscreen data table so assistive tech gets the full series.
+ * Recharts, no Chart.js, no wrapper. Interactive by pointer and keyboard — focus
+ * the chart and use ←/→ to read each month, Home/End to jump, Escape to clear —
+ * with an offscreen data table so assistive tech gets the full series.
  */
 export function NavChart({ series, height = 320, className }: NavChartProps) {
   const wrapRef = React.useRef<HTMLDivElement>(null);
@@ -113,6 +114,34 @@ export function NavChart({ series, height = 320, className }: NavChartProps) {
     return Math.max(0, Math.min(n - 1, i));
   }
 
+  // Keyboard navigation: the crosshair starts from the last point (where it sits
+  // by default) and walks the series. Escape clears it, matching pointer-leave.
+  function onKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (n === 0) return;
+    const base = active ?? n - 1;
+    switch (e.key) {
+      case "ArrowLeft":
+        e.preventDefault();
+        setActive(Math.max(0, base - 1));
+        break;
+      case "ArrowRight":
+        e.preventDefault();
+        setActive(Math.min(n - 1, base + 1));
+        break;
+      case "Home":
+        e.preventDefault();
+        setActive(0);
+        break;
+      case "End":
+        e.preventDefault();
+        setActive(n - 1);
+        break;
+      case "Escape":
+        setActive(null);
+        break;
+    }
+  }
+
   const navRet = cur ? cur.nav - 100 : 0;
   const benchRet = cur ? cur.bench - 100 : 0;
 
@@ -161,7 +190,10 @@ export function NavChart({ series, height = 320, className }: NavChartProps) {
       {/* Chart */}
       <div
         ref={wrapRef}
-        className="relative w-full select-none overflow-hidden"
+        tabIndex={0}
+        role="group"
+        aria-label="Strategy versus benchmark chart — use the left and right arrow keys to read each month, Home and End to jump to the ends, Escape to clear"
+        className="relative w-full select-none overflow-hidden rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
         style={{ height, touchAction: "pan-y", WebkitTouchCallout: "none" }}
         onPointerDown={(e) => {
           if (e.pointerType === "touch") e.currentTarget.setPointerCapture(e.pointerId);
@@ -172,6 +204,7 @@ export function NavChart({ series, height = 320, className }: NavChartProps) {
           // Touch fires leave on finger-up; keep the crosshair pinned instead.
           if (e.pointerType !== "touch") setActive(null);
         }}
+        onKeyDown={onKeyDown}
       >
         <svg
           width={width}
@@ -315,7 +348,7 @@ export function NavChart({ series, height = 320, className }: NavChartProps) {
       </div>
 
       <p className="mt-3 font-mono text-[11px] leading-relaxed text-ink-3">
-        Raw SVG · d3-scale axes · d3-shape path geometry · rendered by hand. No charting library. Hover or drag to read any month.
+        Raw SVG · d3-scale axes · d3-shape path geometry · rendered by hand. No charting library. Hover, drag, or use arrow keys to read any month.
       </p>
 
       {/* Offscreen data table for assistive technology */}
