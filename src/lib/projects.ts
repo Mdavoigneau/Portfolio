@@ -176,7 +176,7 @@ export const PROJECTS: Project[] = [
     detail:
       "Anyone can check availability and book in plain English from Claude. Also feeds HR's time-reporting, saving the back-office a few hours a month.",
     note:
-      "Append-only daily snapshots give a forensic record of team state; the intraday timeline is rendered from computed segments in pure CSS, with no charting library. Every model-driven mutation is validated through strict Zod schemas before it can touch the database, and validation errors are handed back for correction.",
+      "Daily snapshots give a per-day record of team state; the intraday timeline is rendered from computed segments in pure CSS, with no charting library. Every model-driven mutation is validated before it can touch the database — Zod guards the tool arguments and a hand-rolled validator enforces the booking rules — and validation errors are handed back for correction.",
     stack: ["Next.js", "React", "TypeScript (strict)", "MCP SDK", "SQLite"],
     metrics: [
       { label: "40+ users", provenance: "fact" },
@@ -334,7 +334,7 @@ export const PROJECTS: Project[] = [
       "Aggregates data from spreadsheets, the CRM and government APIs, pre-fills claims, extracts device identifiers from photos via OCR, and submits compliant files in seconds instead of minutes per case.",
     note:
       "OCR serial/IMEI extraction with multi-format barcode fallback; eligibility and payout rules computed to the cent; idempotent submission so a re-run never double-files.",
-    stack: ["Python", "Next.js", "PostgreSQL", "OCR", "Redis"],
+    stack: ["Python", "Next.js", "PostgreSQL", "OCR"],
     metrics: [
       { label: "~A$330k/yr", provenance: "team" },
       { label: "~80% less processing time", provenance: "team" },
@@ -352,7 +352,7 @@ export const PROJECTS: Project[] = [
     detail:
       "Customers get a personalised quote and book without phone tag; the back-office manages brands, models, repairs and prices. Replaced phone-and-email coordination with a self-serve flow.",
     note:
-      "Server-side price recalculation with a to-the-cent (±0.01) tolerance inside a transaction; immutable devis snapshots (a JSON blob frozen at creation) for an audit trail; an hourly Google-Sheets catalogue sync with longest-prefix series inference; a hand-rolled SVG reservation timeline, no charting library.",
+      "Server-side price recalculation with a to-the-cent (±0.01) tolerance inside a transaction; immutable devis snapshots (a JSON blob frozen at creation) for an audit trail; an hourly Google-Sheets catalogue sync with longest-prefix series inference; a hand-rolled CSS reservation timeline, no charting library.",
     stack: ["Next.js", "React", "TypeScript", "PostgreSQL", "Recharts"],
     metrics: [{ label: "~20 hrs/wk admin saved", provenance: "self" }],
     tags: ["Self-serve workflow", "Transactional integrity"],
@@ -388,7 +388,7 @@ export const PROJECTS: Project[] = [
     detail:
       "Turns recordings into timestamped, speaker-labelled transcripts entirely offline, recognising the same speakers across meetings and flagging likely errors for review. Built and working; held from rollout until the on-prem inference hardware is provisioned.",
     note:
-      "Speaker diarization via pyannote.audio with real-time voiceprint embeddings to match speakers across jobs; hallucination detection (repeat loops, number runs); a local LLM checks the transcript against a domain glossary to fix terminology. NDJSON event-stream progress with a single-worker GPU executor to avoid contention.",
+      "Speaker diarization via pyannote.audio with real-time voiceprint embeddings to match speakers across jobs; hallucination detection (repeat loops, number runs); a local LLM checks the transcript against a domain glossary to fix terminology. Server-sent-event (SSE) progress with a single-worker GPU executor to avoid contention.",
     stack: ["Python", "MLX-Whisper", "pyannote.audio", "FastAPI", "Svelte"],
     metrics: [{ label: "~10–20 hrs/mo", provenance: "self" }],
     tags: ["On-device AI", "Audio"],

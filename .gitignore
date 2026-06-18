@@ -5,3 +5,6 @@ dist
 .env
 .env.*
 node_modules/.tmp
+
+# Local interview prep — not for commit
+interview-prep/
