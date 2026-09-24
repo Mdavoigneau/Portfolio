@@ -60,6 +60,11 @@ export const DEMOS: Record<string, DemoEntry> = {
     caption:
       "Before it was a web app, the government repair-incentive claims ran in this Python terminal tool, built fast under an emergency. Replay one Ecologic case end to end: the ticket review, the Drive document pick, the IMEI prompt, the brand / product / IRIS picker, then CreateClaim and submit.",
   },
+  "unit-trust": {
+    Component: lazy(() => import("./unit-trust")),
+    caption:
+      "One month-end on a synthetic fund, run by the production rules: declare the distribution, strike the price, settle each application at the price its receipt date resolves to, then pay by reinvestment and bank file and attribute the tax. Exact decimals throughout, a ledger that always balances, and a history that refuses to be rewritten. Try the steps out of order too.",
+  },
 };
 
 export function hasDemo(id: string): boolean {

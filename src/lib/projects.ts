@@ -85,19 +85,24 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "unit-trust",
-    title: "Wholesale unit-trust ledger & daily NAV",
+    title: "Wholesale unit-trust administration",
     context: "A financial institution · Funds administration",
-    status: "dev",
-    featured: false,
+    status: "prod",
+    featured: true,
     summary:
-      "A fund-administration backbone where compliance is enforced by the database. The first system of its kind at the firm.",
+      "Registry, unit pricing and distributions for six wholesale funds, with compliance enforced by the database itself.",
     detail:
-      "A double-entry general ledger, a daily NAV strike with forward-pricing cut-offs, and an append-only audit trail, where every application, redemption, distribution and fee posts a balanced journal. It was net-new groundwork: nothing like it existed at the firm before.",
+      "The firm's first fund-administration system, now live on AWS with six funds on its register. It carries an application from intake through AML/KYC and wholesale checks to settlement at a forward price, strikes each fund's unit price under FSC Standard 17, and runs distributions end to end, down to reinvested units and the bank payment file. Holding statements, personalised application forms, a mandate-drift dashboard and a due-diligence register grew around that core. Every application, redemption and distribution posts a balanced double-entry journal, and settled history is append-only: a correction can only be a new entry, never an edit.",
     note:
-      "Unit prices struck to four decimals (six internal) per FSC Standard 17; CHECK constraints hold application ≥ NAV ≥ redemption; BEFORE-UPDATE/DELETE triggers make the ledger physically append-only. Corrections post as reversing journals, never edits. Decimal arithmetic throughout, so valuations reconcile to the cent.",
-    stack: ["Python", "SQLAlchemy", "SQLite (WAL)", "Decimal"],
-    metrics: [{ label: "First of its kind", provenance: "qual" }],
-    tags: ["Reconciliation", "Financial maths", "Audit / governance"],
+      "Compliance lives in the schema. CHECK constraints hold application ≥ NAV ≥ redemption, priced in Decimal to four places (six internal); 31 SQLite triggers keep the audit log, the ledger and every struck price append-only, and refuse settlement without AML/KYC and wholesale evidence, whatever code path asks. Forward pricing keys off the receipt date: an application waits, unpriced, for the first strike on or after it, rather than taking a stale price that could dilute existing holders. A declared distribution is booked as a liability, so the unit price falls from the ex-date by construction (NAV = assets − liabilities) and no published price is ever restated. AMIT attribution runs in whole cents (largest remainder per tax character, then single-cent transfers between members), so every character and every member reconciles exactly. Covered by 1,471 tests and 112 browser flows, with the guards sabotage-tested: broken on purpose to confirm the right test fails.",
+    stack: ["Python", "Flask", "SQLAlchemy", "SQLite", "WeasyPrint", "Playwright", "AWS"],
+    metrics: [
+      { label: "~150 hrs/mo", provenance: "team" },
+      { label: "6 funds on one register", provenance: "fact" },
+      { label: "1,500+ tests", provenance: "fact" },
+      { label: "First of its kind", provenance: "qual" },
+    ],
+    tags: ["Reconciliation", "Financial maths", "Audit / governance", "Regulatory workflow"],
   },
   {
     id: "sma-dashboard",
@@ -448,7 +453,7 @@ const DATES: Record<string, string> = {
   "smsf-agent": "2026-04",
   "asx-scanner": "2026-05",
   "sma-dashboard": "2026-05",
-  "unit-trust": "2026-05",
+  "unit-trust": "2026-07",
   "trend-following": "2026-05",
   "smsf-intake": "2026-05",
   "compliance-reviewer": "2026-06",
