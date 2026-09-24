@@ -1,9 +1,9 @@
 # Matteo Davoigneau
 
-Full-stack and frontend engineer in Sydney, focused on financial data. I build
-end-to-end, from the front-end through to the infrastructure it runs on: data-dense
-dashboards, charts and ledgers, the typed APIs behind them, and the parts around them
-that keep data trustworthy (auth, audit logging, encrypted backups, human-review gates).
+AI and software engineer in Sydney. I build AI and automation that teams actually use,
+end-to-end: from the front-end through to the infrastructure it runs on, the typed APIs in
+between, and the parts that keep data trustworthy (auth, audit logging, encrypted backups,
+human-review gates).
 
 I work from first principles, care about craft and precision, and like owning a product
 surface from the design system down to the deploy. Off the clock I invest in equities and
@@ -15,9 +15,9 @@ derivatives, and build the tools I wish existed.
 
 ## This repository
 
-The source of my portfolio site. It is a single page, built in the stack it talks about,
-so the site is itself a work sample: a hand-rolled, interactive raw-SVG chart (no charting
-library) and a headless TanStack data grid, both styled from one set of design tokens.
+The source of my portfolio site: a single page that reads everything from one typed
+project ledger (`src/lib/projects.ts`), so the headline numbers, the hours chart and the
+ledger can't drift apart. Several projects open a working miniature on synthetic data.
 
 ### Stack
 
@@ -27,8 +27,7 @@ library) and a headless TanStack data grid, both styled from one set of design t
 - **Tailwind CSS v4** (CSS-first `@theme` tokens)
 - **Radix UI** primitives
 - **CVA + clsx + tailwind-merge** for component variants
-- **d3-scale / d3-shape** for chart geometry, rendered as raw SVG by hand
-- **@tanstack/react-table** for the live data grid
+- **d3-scale / d3-shape** for the demos' chart geometry, rendered as raw SVG by hand
 - **lucide-react** for icons
 
 No charting wrapper, no UI template.
@@ -57,12 +56,12 @@ npm run deploy     # = npx wrangler deploy (builds, then deploys ./dist)
 
 Some of the projects described on the site are live systems built for regulated firms.
 **No client identifiers, holdings, account numbers, credentials or screenshots appear
-anywhere in this repository or on the page.** Descriptions are genericised, and every
-figure shown (the chart, the holdings grid) is illustrative or synthetic;
-`src/lib/data.ts` documents this.
+anywhere in this repository or on the page.** Descriptions are genericised and the demos
+run on synthetic data. Impact figures are real, and each one carries its provenance:
+reported by the team using the tool, or my own estimate.
 
 ### Accessibility
 
-Accessibility: the chart exposes its full series to assistive tech via an offscreen
-data table and an `aria-label` summary, `aria-sort` on the sortable grid, visible focus
-states, a skip link, contrast-checked text tokens, and full `prefers-reduced-motion` support.
+Each row of the hours chart is a button with screen-reader text for its value and where the
+figure came from. There are visible focus states, a skip link, contrast-checked text tokens,
+and full `prefers-reduced-motion` support.

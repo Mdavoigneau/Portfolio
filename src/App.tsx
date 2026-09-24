@@ -2,7 +2,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { Metrics } from "@/components/site/Metrics";
-import { LiveProof } from "@/components/site/LiveProof";
 import { SelectedWork } from "@/components/site/SelectedWork";
 import { ProjectLedger } from "@/components/site/ProjectLedger";
 import { Capabilities } from "@/components/site/Capabilities";
@@ -22,7 +21,6 @@ export function App() {
       <main>
         <Hero />
         <Metrics />
-        <LiveProof />
         <SelectedWork />
         <ProjectLedger />
         <Capabilities />

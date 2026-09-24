@@ -11,7 +11,7 @@ export function Contact() {
           <div className="mx-auto max-w-3xl text-center">
             <Eyebrow className="mb-4">Contact</Eyebrow>
             <h2 className="text-4xl tracking-tight text-ink md:text-5xl">
-              If your clients stake decisions on it,{" "}
+              If it eats your team's week,{" "}
               <span className="font-serif italic text-brand-700">it's worth building well</span>.
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-ink-2">
@@ -49,9 +49,9 @@ export function Contact() {
           <p className="max-w-3xl text-xs leading-relaxed text-ink-3">
             <span className="font-medium text-ink-2">A note on the work shown:</span> several
             systems above are live, regulated platforms built for a financial institution. Client
-            identifiers, holdings, credentials and screenshots are deliberately omitted, and every
-            figure on this page is illustrative or synthetic. Discretion with client data is part
-            of the job.
+            identifiers, holdings, credentials and screenshots are deliberately left out, and the
+            demos run on synthetic data. The impact figures are real, each marked with where it
+            came from. Discretion with client data is part of the job.
           </p>
           <div className="flex flex-col items-start justify-between gap-4 border-t border-line/60 pt-6 sm:flex-row sm:items-center">
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-ink-2">

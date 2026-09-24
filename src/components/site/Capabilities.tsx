@@ -1,14 +1,15 @@
 import {
-  BarChart3,
   Compass,
   Landmark,
   Layers,
   ShieldCheck,
   Sparkles,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Container, Section, SectionHead } from "@/components/ui/section";
+import { FIRM_SYSTEMS } from "@/lib/projects";
 
 interface Capability {
   icon: LucideIcon;
@@ -19,40 +20,40 @@ interface Capability {
 
 const CAPABILITIES: Capability[] = [
   {
-    icon: Layers,
-    title: "End-to-end, front-end to infrastructure",
-    body: "I build whole verticals on my own: a typed React front-end, the API and relational schema behind it, auth and audit logging, and the box it runs on. No layer of the stack is left to someone else.",
-    evidence: "Every system here: UI, data model, deploy, backups.",
-  },
-  {
     icon: Sparkles,
     title: "AI that ships, not demos",
     body: "Retrieval-augmented drafting over thousands of real emails, an on-device document agent, vision OCR, and Claude exposed as live tools over MCP. Streaming, grounded in sources, with a human in the loop.",
     evidence: "On-device SMSF agent · MP email RAG · compliance reviewer · MCP tools.",
   },
   {
+    icon: Users,
+    title: "Adoption, one team at a time",
+    body: "Tools only matter if people use them. I rolled Claude out across a ~30-person firm by learning each team's work first, then shaping its setup, its training and the guardrails around that work.",
+    evidence: "Claude rollout · AI-delivery knowledge base · internal training.",
+  },
+  {
+    icon: Layers,
+    title: "End-to-end, with the teams",
+    body: "I build whole systems: a typed React front-end, the API and schema behind it, auth and audit logging, and the box it runs on. The requirements come straight from the people who will use it.",
+    evidence: `${FIRM_SYSTEMS.length} systems at one firm, requirements from its own teams.`,
+  },
+  {
     icon: ShieldCheck,
     title: "Security & compliance by default",
     body: "Encryption at rest (AES-256-GCM, SQLCipher), SSO with per-request revalidation, append-only audit ledgers, and human-review gates. Built for regulated data from the first commit.",
-    evidence: "Fund ledger · SMSF intake · proposal engine · compliance reviewer.",
-  },
-  {
-    icon: BarChart3,
-    title: "Interfaces that present numbers people act on",
-    body: "Dashboards, sortable tables and charts built from primitives (raw SVG, no wrapper when the chart is the point). The detail a reader needs, without the clutter.",
-    evidence: "The live chart and grid above · risk dashboards · price analytics.",
+    evidence: "Fund ledger · SMSF intake · proposal engine · compliance reviewer · phishing simulation.",
   },
   {
     icon: Landmark,
     title: "Finance, spoken natively",
-    body: "NAV and FSC-17 unit pricing, double-entry ledgers, risk statistics, geometric annualisation, margin blends. I present financial data the way sophisticated readers expect it, and I invest in equities and derivatives myself.",
+    body: "NAV and FSC-17 unit pricing, double-entry ledgers, risk statistics, geometric annualisation, margin blends. I know the domain well enough to get the numbers right, and I invest in equities and derivatives myself.",
     evidence: "Fund-admin ledger · managed-accounts dashboard · proposal engine · quant research.",
   },
   {
     icon: Compass,
-    title: "First principles & real autonomy",
-    body: "Twenty-two production systems shipped solo, most on a $5–7/month box. Maths derived by hand where it matters, and a bias toward telling you exactly what I have and haven't done over a confident bluff.",
-    evidence: "Independent delivery, end-to-end, with audit logging and human-review gates.",
+    title: "First principles & honest numbers",
+    body: "Maths derived by hand where it matters, costs kept lean (most systems run on a $5–7/month box), and every impact figure on this page marked with where it came from.",
+    evidence: "Provenance on every figure · audit logging · human-review gates.",
   },
 ];
 

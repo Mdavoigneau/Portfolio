@@ -1,7 +1,7 @@
 /**
  * The project ledger.
  *
- * Every system shipped solo, genericised. The employer is "a financial
+ * Every system, built end-to-end and genericised. The employer is "a financial
  * institution", never named; no client identifiers, holdings or credentials
  * appear anywhere. Each impact figure carries its provenance so a reader knows
  * whether the number was reported by the team using the tool or estimated by me.
@@ -32,6 +32,8 @@ export interface Project {
   metrics: Metric[];
   /** JD-pillar tags, shown on featured cards */
   tags?: string[];
+  /** "program" marks work that isn't a system (a rollout), so system counts skip it */
+  kind?: "program";
 }
 
 export const PROVENANCE_LABEL: Record<Provenance, string> = {
@@ -54,7 +56,7 @@ export const PROJECTS: Project[] = [
     title: "Refurbished-market price intelligence",
     context: "Own business",
     status: "prod",
-    featured: true,
+    featured: false,
     summary:
       "Daily price-intelligence and margin tool for a low-margin refurbished-phone business of my own.",
     detail:
@@ -68,6 +70,23 @@ export const PROJECTS: Project[] = [
 
   // ── A financial institution ────────────────────────────────────────────────
   {
+    id: "claude-rollout",
+    title: "Firm-wide Claude rollout",
+    context: "A financial institution · Firm-wide",
+    status: "prod",
+    featured: true,
+    kind: "program",
+    summary:
+      "Rolled Claude out to ~30 staff across the firm, with each team's setup built around its own work.",
+    detail:
+      "I sat with each team to learn how the work actually gets done, then set Claude up around it: knowledge projects built from a team's own procedures and templates, a starter configuration for anyone building with Claude Code, and the firm's scheduling system exposed as live tools over MCP. Training covered technical and non-technical staff alike.",
+    note:
+      "Adoption needs guardrails people can live with. Client data stays out of the knowledge projects (placeholders only), every client-facing draft keeps a human in the loop, and a staff member who wants to change a live system works on a branch that IT reviews, with a hard-refuse list: auth, schema, dependencies, infrastructure and secrets. A projects register tracks every build's status, hours saved and whether it touches client data.",
+    stack: ["Claude Team plan", "Claude Code", "MCP", "Notion"],
+    metrics: [{ label: "~30 staff", provenance: "fact" }],
+    tags: ["AI adoption", "Governance", "Training"],
+  },
+  {
     id: "smsf-intake",
     title: "SMSF intake platform",
     context: "A financial institution · SMSF (white-label, adaptable to any enterprise)",
@@ -80,7 +99,7 @@ export const PROJECTS: Project[] = [
     note:
       "AES-256-GCM-encrypted PII with deterministic email hashing for lookup; dual B2B/B2C channels isolated at the schema level with independent CRM routing; everything driven from a single typed questions config so the form, validators, exports and admin views never drift. Shipped with unit + browser test coverage.",
     stack: ["Next.js", "TypeScript (strict)", "SQLite", "AES-256-GCM", "Zod"],
-    metrics: [{ label: "~20 hrs/adviser·mo", provenance: "self" }],
+    metrics: [{ label: "~200 hrs/mo", provenance: "team" }],
     tags: ["White-label", "Security", "Typed contracts"],
   },
   {
@@ -109,7 +128,7 @@ export const PROJECTS: Project[] = [
     title: "Separately Managed Accounts portfolio & risk dashboard",
     context: "A financial institution · Wealth advisory",
     status: "prod",
-    featured: true,
+    featured: false,
     summary:
       "Per-portfolio performance, risk and mandate-compliance for a managed-accounts program, plus an investment-committee workspace.",
     detail:
@@ -181,7 +200,7 @@ export const PROJECTS: Project[] = [
     detail:
       "Anyone can check availability and book in plain English from Claude. Also feeds HR's time-reporting, saving the back-office a few hours a month.",
     note:
-      "Daily snapshots give a per-day record of team state; the intraday timeline is rendered from computed segments in pure CSS, with no charting library. Every model-driven mutation is validated before it can touch the database — Zod guards the tool arguments and a hand-rolled validator enforces the booking rules — and validation errors are handed back for correction.",
+      "Daily snapshots give a per-day record of team state; the intraday timeline is rendered from computed segments in pure CSS, with no charting library. Every model-driven mutation is validated before it can touch the database: Zod guards the tool arguments, a hand-rolled validator enforces the booking rules, and validation errors are handed back for correction.",
     stack: ["Next.js", "React", "TypeScript (strict)", "MCP SDK", "SQLite"],
     metrics: [
       { label: "40+ users", provenance: "fact" },
@@ -203,7 +222,7 @@ export const PROJECTS: Project[] = [
       "Three-channel lead delivery (SQLite first, then SES + CRM in parallel via Promise.allSettled) returns success if any channel survives. Honeypot bot-traps are verified by E2E; visitor analytics use weekly-rotated IP hashing for accurate counts without keeping a privacy liability. No page ships without its Playwright suite passing.",
     stack: ["Next.js", "React", "TypeScript (strict)", "Zod", "CI/CD"],
     metrics: [
-      { label: "~50 hrs/mo", provenance: "self" },
+      { label: "~50 hrs/mo", provenance: "team" },
       { label: "12 live pages", provenance: "fact" },
     ],
     tags: ["Ship fast + governed", "Cost discipline"],
@@ -211,15 +230,15 @@ export const PROJECTS: Project[] = [
   {
     id: "asx-scanner",
     title: "Hybrid live ASX scanner",
-    context: "A financial institution · Research",
+    context: "A financial institution · Trading",
     status: "prod",
     featured: false,
     summary:
       "Ranks the ASX universe daily, then overlays live Interactive Brokers ticks only for the candidates that matter.",
     detail:
-      "Real-time gainers / losers / volume movers for an analyst, degrading gracefully to delayed quotes if the live connection drops.",
+      "Real-time gainers / losers / volume movers for a trader, degrading gracefully to delayed quotes if the live connection drops.",
     note:
-      "Ranks on free delayed data (sufficient for ranking, no scanner subscription needed), then overlays live IBKR ticks only for the top candidates, recovering accuracy exactly where it matters. Thread-safe dual loops behind a lock; graceful fallback to delayed quotes when TWS/Gateway is unavailable.",
+      "Ranks on free delayed data (sufficient for ranking, no scanner subscription needed), then overlays live IBKR ticks only for the top candidates, recovering accuracy exactly where it matters and staying under the broker's 100-line market-data cap. Thread-safe dual loops behind a lock; graceful fallback to delayed quotes when TWS/Gateway is unavailable.",
     stack: ["Python", "Interactive Brokers API", "yfinance", "Flask"],
     metrics: [{ label: "Real-time", provenance: "qual" }],
     tags: ["Market data", "Reliability"],
@@ -257,6 +276,22 @@ export const PROJECTS: Project[] = [
     tags: ["Document workflow", "Security"],
   },
   {
+    id: "advice-management",
+    title: "Advice-management client records",
+    context: "A financial institution · Wealth advisory",
+    status: "prod",
+    featured: false,
+    summary:
+      "The advisory team's system of record: client details, assets, goals, fees, estate planning and the full advice and review trail.",
+    detail:
+      "Built to replace a commercial advice CRM with one shaped around how the firm's advisers and paraplanners actually work. It is a record system, deliberately not a modelling engine, and is in production with a first group of advisers' client books.",
+    note:
+      "Access control fails closed at three layers (page, server action and SQL scoping), so a row outside a user's scope is never even read. Sensitive fields and attachments are encrypted with AES-256-GCM, and sign-in runs through the firm's SSO with MFA, plus passkeys. The server never builds anything: CI builds, tests and publishes, then a systemd timer pulls the release, takes a backup if the schema version moved, migrates, health-checks and rolls itself back on failure.",
+    stack: ["Next.js", "React", "TypeScript (strict)", "SQLite", "AES-256-GCM", "WebAuthn"],
+    metrics: [{ label: "Replacing a commercial CRM", provenance: "qual" }],
+    tags: ["System of record", "Security", "Zero-touch deploys"],
+  },
+  {
     id: "share-registry",
     title: "Shareholder registry portal",
     context: "A financial institution · Management",
@@ -269,7 +304,7 @@ export const PROJECTS: Project[] = [
     note:
       "SHIN-scoped JWT sessions; NextAuth credentials with rate-limited login and scrypt hashing (legacy-to-modern rehash on first login); all mutations via server actions; SQLite bound to localhost only; encrypted S3 backups four times daily.",
     stack: ["Next.js", "React", "TypeScript (strict)", "SQLite", "NextAuth"],
-    metrics: [{ label: "~120 hrs/yr", provenance: "self" }],
+    metrics: [{ label: "~120 hrs/yr", provenance: "team" }],
     tags: ["Self-serve portal", "RBAC"],
   },
   {
@@ -285,7 +320,7 @@ export const PROJECTS: Project[] = [
     note:
       "Cryptographically-secure per-survey bearer tokens with constant-time comparison; conditional questions driven by parent answers; server-side autosave every 3s; hot-safe SQLite .backup streamed to S3 with a 6-month lifecycle.",
     stack: ["Next.js", "React", "TypeScript", "SQLite", "AWS SES"],
-    metrics: [{ label: "~10 hrs/mo", provenance: "self" }],
+    metrics: [{ label: "~20 hrs/mo", provenance: "team" }],
     tags: ["Client workflow", "Reporting"],
   },
   {
@@ -301,15 +336,47 @@ export const PROJECTS: Project[] = [
     note:
       "Distils the production architecture into a repeatable template: App Router + SQLite WAL (zero external deps), Caddy auto-TLS, systemd. The security guide runs to 2,000+ lines (IAM scoping, S3 lifecycle, KMS, SES verification, audit logging); a non-technical 'iterate on a live project' guide lets staff request changes without touching git, behind a mandatory review gate.",
     stack: ["Markdown", "Next.js patterns", "AWS", "Notion API"],
-    metrics: [{ label: "~10 days saved / new project", provenance: "self" }],
+    metrics: [{ label: "~10 days saved / new project", provenance: "team" }],
     tags: ["AI delivery governance", "Internal infra"],
   },
+  {
+    id: "transcription",
+    title: "On-device meeting transcription",
+    context: "A financial institution · Firm-wide",
+    status: "ready",
+    featured: false,
+    summary:
+      "Offline meeting transcription with speaker diarization, voiceprint matching across meetings, and an AI accuracy check.",
+    detail:
+      "Turns recordings into timestamped, speaker-labelled transcripts entirely offline, recognising the same speakers across meetings and flagging likely errors for review. Built and working; held from rollout until the on-prem inference hardware is provisioned.",
+    note:
+      "Speaker diarization via pyannote.audio with real-time voiceprint embeddings to match speakers across jobs; hallucination detection (repeat loops, number runs); a local LLM checks the transcript against a domain glossary to fix terminology. Server-sent-event (SSE) progress with a single-worker GPU executor to avoid contention.",
+    stack: ["Python", "MLX-Whisper", "pyannote.audio", "FastAPI", "Svelte"],
+    metrics: [{ label: "~10–20 hrs/mo", provenance: "self" }],
+    tags: ["On-device AI", "Audio"],
+  },
+  {
+    id: "phishing-sim",
+    title: "Phishing-awareness simulation",
+    context: "A financial institution · IT & security",
+    status: "prod",
+    featured: false,
+    summary:
+      "A phishing exercise for staff: a simulated lure, click measurement by team, then a training debrief.",
+    detail:
+      "Built, deployed and run. Lures are segmented by team (advisers, finance, operations, HR), clicks are measured, and the debrief turns the results into training. Results are reported in aggregate: numbers, not names.",
+    note:
+      "The landing page teaches on the spot and captures nothing, with no credentials and no passwords, so the exercise can never become a data risk itself. GoPhish runs behind a Caddy TLS front in Docker Compose on a small VPS, sending through an authenticated SMTP relay, with scripted deploys.",
+    stack: ["GoPhish", "Docker Compose", "Caddy", "Bash"],
+    metrics: [{ label: "Captures no credentials", provenance: "qual" }],
+    tags: ["Security awareness", "Privacy by design"],
+  },
 
-  // ── A state MP's office ──────────────────────────────────────────────────────
+  // ── Personal project · a state MP's office ─────────────────────────────────────
   {
     id: "mp-email",
     title: "AI email triage & reply-drafting",
-    context: "A state MP's office",
+    context: "Personal project · A state MP's office",
     status: "prod",
     featured: true,
     summary:
@@ -320,7 +387,7 @@ export const PROJECTS: Project[] = [
       "RAG over 2,300+ historic reply pairs with Voyage embeddings (1024-dim, K=6 retrieval) paired with Claude for exemplar-informed drafting. Gmail access via domain-wide delegation with service-account JWT signing (no downloadable keys); MIME-aware attachment extraction; runs on Cloud Functions polled every minute.",
     stack: ["Python", "Claude API", "Voyage embeddings", "Google Cloud", "Gmail API"],
     metrics: [
-      { label: "~40–60 hrs/mo", provenance: "team" },
+      { label: "~80 hrs/mo", provenance: "team" },
       { label: "~500 emails/mo", provenance: "fact" },
     ],
     tags: ["AI UX · RAG / grounding", "Production automation"],
@@ -332,7 +399,7 @@ export const PROJECTS: Project[] = [
     title: "Government-incentive claim automation",
     context: "iRep · France",
     status: "prod",
-    featured: false,
+    featured: true,
     summary:
       "Turned a manual repair-incentive workflow into a near-instant compliant pipeline: OCR, eligibility, payout rules.",
     detail:
@@ -341,7 +408,7 @@ export const PROJECTS: Project[] = [
       "OCR serial/IMEI extraction with multi-format barcode fallback; eligibility and payout rules computed to the cent; idempotent submission so a re-run never double-files.",
     stack: ["Python", "Next.js", "PostgreSQL", "OCR"],
     metrics: [
-      { label: "~A$330k/yr", provenance: "team" },
+      { label: "~€200k/yr (A$330k)", provenance: "team" },
       { label: "~80% less processing time", provenance: "team" },
     ],
     tags: ["Process automation", "OCR"],
@@ -381,31 +448,13 @@ export const PROJECTS: Project[] = [
     tags: ["Data at scale", "Diagnostics"],
   },
 
-  // ── On-device tooling ────────────────────────────────────────────────────────
-  {
-    id: "transcription",
-    title: "On-device meeting transcription",
-    context: "Personal · on-device tooling",
-    status: "ready",
-    featured: false,
-    summary:
-      "Offline meeting transcription with speaker diarization, voiceprint matching across meetings, and an AI accuracy check.",
-    detail:
-      "Turns recordings into timestamped, speaker-labelled transcripts entirely offline, recognising the same speakers across meetings and flagging likely errors for review. Built and working; held from rollout until the on-prem inference hardware is provisioned.",
-    note:
-      "Speaker diarization via pyannote.audio with real-time voiceprint embeddings to match speakers across jobs; hallucination detection (repeat loops, number runs); a local LLM checks the transcript against a domain glossary to fix terminology. Server-sent-event (SSE) progress with a single-worker GPU executor to avoid contention.",
-    stack: ["Python", "MLX-Whisper", "pyannote.audio", "FastAPI", "Svelte"],
-    metrics: [{ label: "~10–20 hrs/mo", provenance: "self" }],
-    tags: ["On-device AI", "Audio"],
-  },
-
   // ── Personal · quant research ────────────────────────────────────────────────
   {
     id: "trend-following",
     title: "Trend-following research system",
     context: "Personal · Quant research",
     status: "prod",
-    featured: true,
+    featured: false,
     summary:
       "A momentum strategy validated across 36 years of market regimes, then deployed live as a monthly rebalancer.",
     detail:
@@ -461,6 +510,9 @@ const DATES: Record<string, string> = {
   "csat": "2026-06",
   "landing-platform": "2026-06",
   "mp-email": "2026-06",
+  "claude-rollout": "2026-06",
+  "advice-management": "2026-07",
+  "phishing-sim": "2026-07",
 };
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -475,7 +527,64 @@ export interface DatedProject extends Project {
   date: string;
 }
 
-export const FEATURED = PROJECTS.filter((p) => p.featured);
+/** Selected Work's card order; a featured project missing from the list goes last. */
+const FEATURED_ORDER = [
+  "unit-trust",
+  "claude-rollout",
+  "smsf-intake",
+  "smsf-agent",
+  "proposal-engine",
+  "compliance-reviewer",
+  "irep-claim",
+  "team-planner",
+  "mp-email",
+];
+
+const featuredRank = (id: string) => {
+  const i = FEATURED_ORDER.indexOf(id);
+  return i === -1 ? FEATURED_ORDER.length : i;
+};
+
+export const FEATURED = PROJECTS.filter((p) => p.featured).sort(
+  (a, b) => featuredRank(a.id) - featuredRank(b.id)
+);
+
+/** Systems built at the financial institution. The rollout is work, not a system. */
+export const FIRM_SYSTEMS = PROJECTS.filter(
+  (p) => p.context.startsWith("A financial institution") && p.kind !== "program"
+);
+
+export interface TimeSaved {
+  /** hours a month; a range counts at its low end */
+  hours: number;
+  /** the figure to print, in hours a month ("150", "10–20") */
+  display: string;
+  provenance: Provenance;
+}
+
+/**
+ * The time a project saves, read from its first time-saving metric
+ * ("~150 hrs/mo", "~10–20 hrs/mo", "~120 hrs/yr", "~20 hrs/wk"), or null.
+ */
+export function timeSaved(p: Project): TimeSaved | null {
+  for (const m of p.metrics) {
+    const match = m.label.match(/([\d.]+)(\s*[–-]\s*[\d.]+)?\s*hrs\/(mo|wk|yr)\b/);
+    if (!match) continue;
+    const n = Number(match[1]);
+    if (match[3] === "mo") {
+      return { hours: n, display: match[1] + (match[2]?.replace(/\s/g, "") ?? ""), provenance: m.provenance };
+    }
+    const hours = match[3] === "wk" ? (n * 52) / 12 : n / 12;
+    return { hours, display: String(Math.round(hours)), provenance: m.provenance };
+  }
+  return null;
+}
+
+/** Hours a month the firm's teams report the systems save; my estimates are left out. */
+export const FIRM_TEAM_HOURS = FIRM_SYSTEMS.reduce((sum, p) => {
+  const t = timeSaved(p);
+  return t?.provenance === "team" ? sum + t.hours : sum;
+}, 0);
 
 /** The full ledger, newest first. */
 export const LEDGER: DatedProject[] = PROJECTS.map((p) => ({

@@ -1,6 +1,8 @@
+import { FIRM_SYSTEMS, FIRM_TEAM_HOURS } from "@/lib/projects";
+
 export const SITE = {
   name: "Matteo Davoigneau",
-  role: "Full-stack & AI engineer",
+  role: "AI & software engineer",
   location: "Sydney, Australia",
   email: "matteo.davoigneau@gmail.com",
   phone: "0481 101 988",
@@ -17,7 +19,6 @@ export interface NavLink {
 }
 
 export const NAV: NavLink[] = [
-  { href: "#proof", label: "Live proof" },
   { href: "#work", label: "Work" },
   { href: "#ledger", label: "Ledger" },
   { href: "#about", label: "About" },
@@ -29,10 +30,19 @@ export interface Metric {
   label: string;
 }
 
-/** Headline numbers across the production work. */
+/** Systems at the firm that are live, not just built. */
+export const FIRM_IN_PRODUCTION = FIRM_SYSTEMS.filter((p) => p.status === "prod").length;
+
+/** Headline numbers, computed from the ledger so they can't drift from it. */
 export const METRICS: Metric[] = [
-  { value: "22", label: "systems shipped solo" },
-  { value: "~400", label: "hours/month recovered for their teams" },
-  { value: "~A$330k", label: "saved per year by one automation" },
-  { value: "~$7", label: "monthly cost to run a typical one" },
+  {
+    value: String(FIRM_IN_PRODUCTION),
+    label: "systems put into production in six months, at one Sydney financial firm",
+  },
+  { value: "~30", label: "staff onboarded onto Claude, one team at a time" },
+  {
+    value: `~${Math.round(FIRM_TEAM_HOURS / 10) * 10}`,
+    label: "hours a month given back, as reported by the teams",
+  },
+  { value: "~A$330k", label: "saved a year by one automation (€200k)" },
 ];

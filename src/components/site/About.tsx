@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Container, Eyebrow, Section } from "@/components/ui/section";
+import { FIRM_SYSTEMS } from "@/lib/projects";
 
 interface Fact {
   label: string;
@@ -47,12 +48,13 @@ export function About() {
           </p>
           <div className="mt-6 space-y-4 text-base leading-relaxed text-ink-2">
             <p>
-              I'm a master's-qualified software engineer in Sydney, originally from France. I like building things
-              end-to-end, from the front-end down to the box they run on, and I've shipped
-              twenty-two production systems solo so far. Most of that has been at a Sydney financial
-              institution, across private wealth, funds administration, SMSF and compliance. Before
-              that I ran a phone-repair business myself, which taught me more about where real
-              processes break than any course did.
+              I'm a master's-qualified software engineer in Sydney, originally from France. I like
+              building things end-to-end, from the front-end down to the box they run on. Over six
+              months at a Sydney financial institution I built {FIRM_SYSTEMS.length} systems with
+              its teams, across private wealth, funds administration, SMSF and compliance, and
+              rolled Claude out to its ~30 staff. Before that I automated a government-incentive
+              claims process in France, and ran a phone-repair business myself, which taught me
+              more about where real processes break than any course did.
             </p>
             <p>
               My interest in markets goes back a while. During the 2021 crypto cycle a close friend,
@@ -66,7 +68,7 @@ export function About() {
               I work from first principles and try to stay honest about the edges of what I know. I
               derive the maths by hand when it matters, put audit logging and human-review gates
               wherever data is sensitive, and keep things lean. I'm happiest owning a problem
-              end-to-end with room to think, and I'll always rather tell you exactly what I have and
+              end-to-end with room to think, and I'd always rather tell you exactly what I have and
               haven't done than oversell it.
             </p>
           </div>

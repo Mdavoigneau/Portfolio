@@ -8,3 +8,6 @@ node_modules/.tmp
 
 # Local interview prep — not for commit
 interview-prep/
+
+# Local cover letters — not for commit
+cover-letters/

@@ -74,7 +74,7 @@ export function SelectedWork() {
                 Systems people <span className="font-serif italic text-brand-700">rely</span> on.
               </>
             }
-            lead="Production work across private wealth, funds administration, SMSF and compliance, plus a business of my own, an MP's office, and quant research."
+            lead="Production work across funds administration, private wealth, SMSF and compliance, a firm-wide Claude rollout, claims automation in France, and a side project for an MP's office."
           />
           <a
             href="#ledger"
@@ -99,7 +99,7 @@ export function SelectedWork() {
             </TooltipTrigger>
             <TooltipContent className="max-w-[18rem] leading-relaxed">
               These are live, regulated systems: client identifiers, holdings and credentials are
-              deliberately omitted, and every figure is illustrative or synthetic.
+              deliberately left out, and the demos run on synthetic data.
             </TooltipContent>
           </Tooltip>
           <span className="inline-flex items-center gap-1.5 text-xs text-ink-3">
